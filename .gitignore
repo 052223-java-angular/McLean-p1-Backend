@@ -61,6 +61,7 @@ replay_pid*
 *.classpath
 *.project
 
+*.idea/*
 *.mvn
 mvnw
 mvnw.cmd
