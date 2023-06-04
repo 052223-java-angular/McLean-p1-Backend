@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This application will primarily be built using Angular framework for frontend and Spring Boot framework for backend. The full stack application will be built on the foundation of Java, HTML, CSS and JavaScript in conjuction with TypeScript and will utilize a PostgreSQL database to store user information and preferences.
+This application will primarily be built using Angular framework for frontend and Spring Boot framework for backend. The full stack application will be built on the foundation of Java, HTML, CSS and JavaScript in conjuction with TypeScript and will utilize a PostgreSQL database to store user information, preferences and comments.
 
 ## User Stories
 
