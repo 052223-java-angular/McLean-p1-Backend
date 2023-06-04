@@ -38,7 +38,7 @@ This full stack application will primarily be built using the Angular and Spring
 ## Tech Stacks
 
 - **Angular**: The main framework used for building the application's frontend.
-- **Spring Boot**: The main framework used for building the application's backend.
+- **Spring Boot**: The framework used for building the application's backend.
 - **TypeScript**: A framework built on JavaScript used for building the application's frontend.
 - **JavaScript**: The programming language used to add dynamic features on the application's frontend.
 - **CSS**: The programming language used for adding style to the application's frontend.
