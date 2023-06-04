@@ -37,7 +37,7 @@ This application will primarily be built using Angular framework for frontend an
 
 ## Tech Stacks
 
-- **Public API**: An API will be used to generate data for the user.
+- **Public API**: An API will be used to generate data for the user at the frontend.
 - **Angular**: The main framework used for building the application's frontend.
 - **Spring Boot**: The framework used for building the application's backend.
 - **TypeScript**: A framework built on JavaScript used for building the application's frontend.
