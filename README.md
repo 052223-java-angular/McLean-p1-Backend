@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This application will primarily be built using Angular/Spring Boot frameworks. The application will be built on the foundation of Java, HTML, CSS and JavaScript and will utilize a PostgreSQL database to store user information and preferences.
+This full stack application will primarily be built using the Angular and Spring Boot frameworks. The application will be built on the foundation of Java, HTML, CSS and JavaScript with use of TypeScript and will utilize a PostgreSQL database to store user information and preferences.
 
 ## User Stories
 
@@ -20,7 +20,7 @@ This application will primarily be built using Angular/Spring Boot frameworks. T
 
 ## MVP (Minimum Viable Product)
 
-- User registration and login
+- Secure user registration and login
 - Browsing and searching for products
 - Adding products to a shopping cart
 - Modifying the shopping cart
@@ -37,7 +37,13 @@ This application will primarily be built using Angular/Spring Boot frameworks. T
 
 ## Tech Stacks
 
-- **Java**: The main programming language used for building the application.
+- **Angular**: The main framework used for building the application's frontend.
+- **Spring Boot**: The main framework used for building the application's backend.
+- **TypeScript**: A framework built on JavaScript used for building the application's frontend.
+- **JavaScript**: The programming language used to add dynamic features on the application's frontend.
+- **CSS**: The programming language used for adding style to the application's frontend.
+- **HTML**: The markup language used for building the application's frontend.
+- **Java**: The foundational programming language used for building the application's backend.
 - **PostgreSQL**: Used as the database to store user, product, and order data.
 - **Maven or Gradle**: Used for managing project dependencies.
 - **JUnit**: A testing framework for Java applications, used to ensure our code works as expected.
@@ -64,4 +70,8 @@ This application will primarily be built using Angular/Spring Boot frameworks. T
 - **Documentation**: The repository should include a README file with clear instructions on how to run the application. Code should be well-commented to allow for easy understanding and maintenance.
 
 - **Scalable**: The design of the application should be scalable, allowing for easy addition of new features or modifications in the future.
+
+## Entity Relationship Diagram
+
+
 
