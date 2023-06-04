@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This full stack application will primarily be built using the Angular and Spring Boot frameworks. The application will be built on the foundation of Java, HTML, CSS and JavaScript with use of TypeScript and will utilize a PostgreSQL database to store user information and preferences.
+This full stack application will primarily be built using the Angular and Spring Boot frameworks. The application will be built on the foundation of Java, HTML, CSS and JavaScript in conjuction with TypeScript and will utilize a PostgreSQL database to store user information and preferences.
 
 ## User Stories
 
@@ -37,6 +37,7 @@ This full stack application will primarily be built using the Angular and Spring
 
 ## Tech Stacks
 
+- **Public API**: An API will be used to generate data for the user.
 - **Angular**: The main framework used for building the application's frontend.
 - **Spring Boot**: The framework used for building the application's backend.
 - **TypeScript**: A framework built on JavaScript used for building the application's frontend.
@@ -46,7 +47,6 @@ This full stack application will primarily be built using the Angular and Spring
 - **Java**: The foundational programming language used for building the application's backend.
 - **PostgreSQL**: Used as the database to store user, product, and order data.
 - **Maven or Gradle**: Used for managing project dependencies.
-- **JUnit**: A testing framework for Java applications, used to ensure our code works as expected.
 - **Log4j**: A logging utility for debugging purposes.
 - **JDBC (Java Database Connectivity)**: An API for connecting and executing queries on the database.
 - **BCrypt**: A Java library for hashing and checking passwords for security.
