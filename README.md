@@ -1,8 +1,8 @@
-# P0 - Pair Programming eCommerce Project
+# P1 - The Planetary Full Stack Application
 
 ## Introduction
 
-This is a Java-based command-line interface (CLI) eCommerce application. The application will be primarily built using Java and will utilize a PostgreSQL database to store product and user information.
+This application will primarily be built using Angular/Spring Boot frameworks. The application will be built on the foundation of Java, HTML, CSS and JavaScript and will utilize a PostgreSQL database to store user information and preferences.
 
 ## User Stories
 
