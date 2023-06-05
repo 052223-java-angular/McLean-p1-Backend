@@ -63,4 +63,4 @@ replay_pid*
 
 *.idea/*
 *target/*
-*.properties
+application.properties
