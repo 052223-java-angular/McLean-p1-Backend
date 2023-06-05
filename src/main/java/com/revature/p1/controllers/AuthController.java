@@ -38,7 +38,7 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @ExceptionHandler(ResourceConflictException.class)
+    @ExceptionHandler({ResourceConflictException.class})
     public ResponseEntity<Map<String, Object>> handleResourceConflictException(ResourceConflictException e) {
         Map<String, Object> map = new HashMap<>();
         map.put("timestamp", new Date(System.currentTimeMillis()));
