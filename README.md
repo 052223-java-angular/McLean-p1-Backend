@@ -28,10 +28,9 @@ This application will primarily be built using Angular framework for frontend an
 
 ## Stretch Goals
 
-- Implementing a recommendation system based on user's previous purchases
+- Implementing an algorithm to sort comments based on date and relevancy to user
 - Adding an admin role that can add, remove, or modify comments
-- Implementing promotional codes and discounts
-- Adding a wish list feature
+- Implementing constellation system to provide user with conjunction information
 
 ## Tech Stacks
 
