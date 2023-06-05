@@ -2,7 +2,8 @@
 
 ## Introduction
 
-This application will primarily be built using Angular framework for frontend and Spring Boot framework for backend. The full stack application will be built on the foundation of Java, HTML, CSS and JavaScript in conjuction with TypeScript and will utilize a PostgreSQL database to store user information, preferences and comments.
+This application will primarily be built using Angular framework for frontend and Spring Boot framework for backend. The full stack application will be built on the foundation of Java, HTML, CSS and JavaScript in conjuction with TypeScript and will utilize a PostgreSQL database to store user information, preferences and comments. The aim of the application is to provide the user with quality planetary information all in one place (a difficult task).
+
 
 ## User Stories
 
@@ -71,5 +72,4 @@ This application will primarily be built using Angular framework for frontend an
 ## Entity Relationship Diagram
 
 ![image](https://github.com/052223-java-angular/McLean-p1-Backend/assets/123115057/fd27fd46-3d6b-43c9-9c75-f0f4419ddb3b)
-
 
