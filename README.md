@@ -1,46 +1,49 @@
-# P0 - Pair Programming eCommerce Project
+# P1 - The Planetary Full Stack Application
 
 ## Introduction
 
-This is a Java-based command-line interface (CLI) eCommerce application. The application will be primarily built using Java and will utilize a PostgreSQL database to store product and user information.
+This application will primarily be built using Angular framework for frontend and Spring Boot framework for backend. The full stack application will be built on the foundation of Java, HTML, CSS and JavaScript in conjuction with TypeScript and will utilize a PostgreSQL database to store user information, preferences and comments. The aim of the application is to provide the user with quality planetary information all in one place (a difficult task).
 
 ## User Stories
 
-- **As a user**, I want to register an account so that I can have a personalized shopping experience.
-- **As a user**, I want to log in to my account so that I can access my shopping cart and order history.
-- **As a user**, I want to browse through products only when logging in.
-- **As a user**, I want to search for products by name, category, or price range so that I can find what I'm looking for.
-- **As a user**, I want to add products to my shopping cart so that I can purchase them later.
-- **As a user**, I want to modify the quantity or remove items from my cart so that I can make changes before finalizing the purchase.
-- **As a user**, I want to check out and pay for my order securely so that my personal and financial information is safe.
-- **As a user**, I want to review my order history so that I can keep track of my purchases.
-- **As a user**, I want to rate and review products so that I can share my experience with other users.
-- **As a user**, I want to view ratings and reviews from other users so that I can make informed buying decisions.
+- **As a user**, I want to register an account so that I can have a personalized learning experience.
+- **As a user**, I want to log in to my account so that I can access my personal notes and saved data.
+- **As a user**, I want to store geolocation data for preferences and study.
+- **As a user**, I want to save important dates to review at a later time.
+- **As a user**, I want to add favorites attributed to planets for note keeping and tracking thoughts.
+- **As a user**, I want to create comments available for view by all users.
+- **As a user**, I want to check out and pay for my subscription securely so that my personal and financial information is safe.
+- **As a user**, I want to review my subscription history so that I can keep track of my monthly payments.
 
 
 ## MVP (Minimum Viable Product)
 
-- User registration and login
-- Browsing and searching for products
-- Adding products to a shopping cart
-- Modifying the shopping cart
-- Secure payment process
-- Order history
-- Product rating and reviewing
+- Secure user registration and login
+- Storing geolocation data
+- Saving important dates to review
+- Adding favorites with notes
+- Comment section
+- Secure checkout
+- Subscription history
 
 ## Stretch Goals
 
-- Implementing a recommendation system based on user's previous purchases
-- Adding an admin role that can add, remove, or modify products
-- Implementing promotional codes and discounts
-- Adding a wish list feature
+- Implementing an algorithm to sort comments based on date and relevancy to user
+- Adding an admin role that can add, remove, or modify comments
+- Implementing constellation system to provide user with conjunction information
 
 ## Tech Stacks
 
-- **Java**: The main programming language used for building the application.
+- **Public API**: An API will be used to generate data for the user at the frontend.
+- **Angular**: The main framework used for building the application's frontend.
+- **Spring Boot**: The framework used for building the application's backend.
+- **TypeScript**: A framework built on JavaScript used for building the application's frontend.
+- **JavaScript**: The programming language used to add dynamic features on the application's frontend.
+- **CSS**: The programming language used for adding style to the application's frontend.
+- **HTML**: The markup language used for building the application's frontend.
+- **Java**: The foundational programming language used for building the application's backend.
 - **PostgreSQL**: Used as the database to store user, product, and order data.
 - **Maven or Gradle**: Used for managing project dependencies.
-- **JUnit**: A testing framework for Java applications, used to ensure our code works as expected.
 - **Log4j**: A logging utility for debugging purposes.
 - **JDBC (Java Database Connectivity)**: An API for connecting and executing queries on the database.
 - **BCrypt**: A Java library for hashing and checking passwords for security.
@@ -64,4 +67,8 @@ This is a Java-based command-line interface (CLI) eCommerce application. The app
 - **Documentation**: The repository should include a README file with clear instructions on how to run the application. Code should be well-commented to allow for easy understanding and maintenance.
 
 - **Scalable**: The design of the application should be scalable, allowing for easy addition of new features or modifications in the future.
+
+## Entity Relationship Diagram
+
+![image](https://github.com/052223-java-angular/McLean-p1-Backend/assets/123115057/fd27fd46-3d6b-43c9-9c75-f0f4419ddb3b)
 
