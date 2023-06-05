@@ -6,32 +6,30 @@ This application will primarily be built using Angular framework for frontend an
 
 ## User Stories
 
-- **As a user**, I want to register an account so that I can have a personalized shopping experience.
-- **As a user**, I want to log in to my account so that I can access my shopping cart and order history.
-- **As a user**, I want to browse through products only when logging in.
-- **As a user**, I want to search for products by name, category, or price range so that I can find what I'm looking for.
-- **As a user**, I want to add products to my shopping cart so that I can purchase them later.
-- **As a user**, I want to modify the quantity or remove items from my cart so that I can make changes before finalizing the purchase.
-- **As a user**, I want to check out and pay for my order securely so that my personal and financial information is safe.
-- **As a user**, I want to review my order history so that I can keep track of my purchases.
-- **As a user**, I want to rate and review products so that I can share my experience with other users.
-- **As a user**, I want to view ratings and reviews from other users so that I can make informed buying decisions.
+- **As a user**, I want to register an account so that I can have a personalized learning experience.
+- **As a user**, I want to log in to my account so that I can access my personal notes and saved data.
+- **As a user**, I want to store geolocation data for preferences and study.
+- **As a user**, I want to save important dates to review at a later time.
+- **As a user**, I want to add favorites attributed to planets for note keeping and tracking thoughts.
+- **As a user**, I want to create comments available for view by all users.
+- **As a user**, I want to check out and pay for my subscription securely so that my personal and financial information is safe.
+- **As a user**, I want to review my subscription history so that I can keep track of my monthly payments.
 
 
 ## MVP (Minimum Viable Product)
 
 - Secure user registration and login
-- Browsing and searching for products
-- Adding products to a shopping cart
-- Modifying the shopping cart
-- Secure payment process
-- Order history
-- Product rating and reviewing
+- Storing geolocation data
+- Saving important dates to review
+- Adding favorites with notes
+- Comment section
+- Secure checkout
+- Subscription history
 
 ## Stretch Goals
 
 - Implementing a recommendation system based on user's previous purchases
-- Adding an admin role that can add, remove, or modify products
+- Adding an admin role that can add, remove, or modify comments
 - Implementing promotional codes and discounts
 - Adding a wish list feature
 
