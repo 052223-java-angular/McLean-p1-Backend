@@ -19,7 +19,7 @@ The planetary application will primarily be built using Angular framework for fr
 ## MVP (Minimum Viable Product)
 
 - Secure user registration and login
-- Storing geolocation data
+- Storing geolocation data with ability to change home location
 - Saving important dates to review
 - Adding favorites with notes
 - Comment section
