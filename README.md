@@ -4,6 +4,7 @@
 
 This application will primarily be built using Angular framework for frontend and Spring Boot framework for backend. The full stack application will be built on the foundation of Java, HTML, CSS and JavaScript in conjuction with TypeScript and will utilize a PostgreSQL database to store user information, preferences and comments. The aim of the application is to provide the user with quality planetary information all in one place (a difficult task).
 
+
 ## User Stories
 
 - **As a user**, I want to register an account so that I can have a personalized learning experience.
