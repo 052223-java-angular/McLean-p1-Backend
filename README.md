@@ -21,6 +21,7 @@ The planetary application will primarily be built using Angular framework for fr
 ## MVP (Minimum Viable Product)
 
 - Secure user registration and login
+- Home geolocation automatically generated at account creation
 - Storing geolocation data with ability to change home location
 - View current sky conditions per location
 - View current data and info about each planet
