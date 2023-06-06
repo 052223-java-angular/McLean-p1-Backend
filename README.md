@@ -28,7 +28,7 @@ The planetary application will primarily be built using Angular framework for fr
 - Saving important dates to review
 - Adding favorites with notes
 - Comment section
-- Secure checkout
+- Secure payments
 - Subscription history
 
 ## Stretch Goals
