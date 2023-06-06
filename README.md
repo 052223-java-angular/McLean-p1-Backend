@@ -11,9 +11,9 @@ The planetary application will primarily be built using Angular framework for fr
 - **As a user**, I want to view current sky conditions for my location.
 - **As a user**, I want to view data about each planet such as current constellation and time until reaching horizon.
 - **As a user**, I want to store geolocation data for preferences.
-- **As a user**, I want to save important dates as snapshots for review at a later time with an option to edit.
-- **As a user**, I want to add favorites attributed to planets for note keeping and tracking thoughts (private).
-- **As a user**, I want to create comments available for view by all users (public).
+- **As a user**, I want to select a constellation to track.
+- **As a user**, I want to save important dates with notes for review at a later time with an option to edit. (private)
+- **As a user**, I want to create comments available for view by all users. (public)
 - **As a user**, I want to check out and pay for my subscription securely so that my personal and financial information is safe.
 - **As a user**, I want to review my subscription history so that I can keep track of my monthly payments.
 
@@ -23,9 +23,10 @@ The planetary application will primarily be built using Angular framework for fr
 - Secure user registration and login
 - Home geolocation automatically generated at account creation
 - Storing additional geolocation data with ability to change home location
-- View current sky conditions per location
+- View current sky (visible) conditions per location
 - View current data and info about each planet
-- Saving important dates as snapshots to review
+- Saving important dates with notes to review
+- Select a constellation to track
 - Comment section
 - Secure subscription payments which unlock more features/storage space
 - Subscription history
