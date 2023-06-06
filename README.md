@@ -16,8 +16,6 @@ The planetary application will primarily be built using Angular framework for fr
 - **As a user**, I want to select a constellation to track.
 - **As a user**, I want to save important dates as snapshots with notes for review at a later time with an option to edit. (private)
 - **As a user**, I want to create comments available for view by all users. (public)
-- **As a user**, I want to check out and pay for my subscription securely so that my personal and financial information is safe.
-- **As a user**, I want to review my subscription history so that I can keep track of my monthly payments.
 
 
 ## MVP (Minimum Viable Product)
