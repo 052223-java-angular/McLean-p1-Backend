@@ -30,6 +30,7 @@ The planetary application will primarily be built using Angular framework for fr
 - Comment section
 - Secure subscription payments which unlock more features/storage space
 - Subscription history
+- Informational 'how-to' page with relevant information
 
 ## Stretch Goals
 
