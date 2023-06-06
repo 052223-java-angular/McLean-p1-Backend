@@ -35,7 +35,7 @@ The planetary application will primarily be built using Angular framework for fr
 
 - Implementing an algorithm to sort comments based on date and relevancy to user
 - Adding an admin role that can add, remove, or modify comments
-- Implementing constellation system to provide user with conjunction information (highly depends on what I can do with the frontend, if angular makes manipulating points on a circle easy I could do some interesting stuff)
+- Implementing constellation system to provide user with conjunction/harmonic information (highly depends on what I can do with the frontend, if angular makes manipulating points on a circle easy I could do some interesting stuff)
 - Add capability on front end to compare dates side by side (unsure what is possible in the project timeframe)
 
 ## Tech Stacks
