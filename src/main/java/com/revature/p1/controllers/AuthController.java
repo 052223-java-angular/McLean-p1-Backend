@@ -24,13 +24,14 @@ public class AuthController {
     //there is also @GetMapping("/all"), @PutMapping("/update"), @DeleteMapping("/delete")
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody NewUserRequest req) {
-        //^^dto = data transfer object
+        //^^dto = data transfer object (the NewUserRequest part)
         //check for valid username
         //check for unique username
         //check for valid password
         //check password confirmation
 
         if(!userService.isUniqueUsername(req.getUsername())) {
+            //thrown exception matches handler with tag ResourceConflictException.class
             throw new ResourceConflictException("Username is not unique");
         }
 
