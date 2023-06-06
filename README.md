@@ -31,8 +31,7 @@ The planetary application will primarily be built using Angular framework for fr
 - Saving important dates as snapshots with notes to review
 - Select a constellation to track
 - Comment section
-- Secure subscription payments which unlock more features/storage space
-- Subscription history
+- Add capability on front end to compare dates side by side 
 - Informational 'how-to' page with relevant information
 
 ## Stretch Goals
@@ -40,7 +39,9 @@ The planetary application will primarily be built using Angular framework for fr
 - Implementing an algorithm to sort comments based on date and relevancy to user
 - Adding an admin role that can add, remove, or modify comments
 - Implementing constellation system to provide user with conjunction/harmonic information (highly depends on what I can do with the frontend, if angular makes manipulating points on a circle easy I could do some interesting stuff)
-- Add capability on front end to compare dates side by side (unsure what is possible in the project timeframe)
+- Secure subscription payments which unlock more features/storage space
+- Subscription history 
+- Add more than two planets to harmonic calculations
 
 ## Tech Stacks
 
