@@ -16,8 +16,6 @@ The planetary application will primarily be built using Angular framework for fr
 - **As a user**, I want to select a constellation to track.
 - **As a user**, I want to save important dates as snapshots with notes for review at a later time with an option to edit. (private)
 - **As a user**, I want to create comments available for view by all users. (public)
-- **As a user**, I want to check out and pay for my subscription securely so that my personal and financial information is safe.
-- **As a user**, I want to review my subscription history so that I can keep track of my monthly payments.
 
 
 ## MVP (Minimum Viable Product)
@@ -31,8 +29,7 @@ The planetary application will primarily be built using Angular framework for fr
 - Saving important dates as snapshots with notes to review
 - Select a constellation to track
 - Comment section
-- Secure subscription payments which unlock more features/storage space
-- Subscription history
+- Add capability on front end to compare dates side by side 
 - Informational 'how-to' page with relevant information
 
 ## Stretch Goals
@@ -40,7 +37,9 @@ The planetary application will primarily be built using Angular framework for fr
 - Implementing an algorithm to sort comments based on date and relevancy to user
 - Adding an admin role that can add, remove, or modify comments
 - Implementing constellation system to provide user with conjunction/harmonic information (highly depends on what I can do with the frontend, if angular makes manipulating points on a circle easy I could do some interesting stuff)
-- Add capability on front end to compare dates side by side (unsure what is possible in the project timeframe)
+- Secure subscription payments which unlock more features/storage space
+- Subscription history 
+- Add more than two planets to harmonic calculations
 
 ## Tech Stacks
 
