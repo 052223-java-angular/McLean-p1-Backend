@@ -25,7 +25,7 @@ The planetary application will primarily be built using Angular framework for fr
 - Storing additional geolocation data with ability to change home location
 - View current sky conditions per location
 - View current data and info about each planet
-- Saving important dates to review
+- Saving important dates as snapshots to review
 - Adding favorites with notes
 - Comment section
 - Secure subscription payments which unlock more features/storage space
