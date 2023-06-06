@@ -12,7 +12,7 @@ The planetary application will primarily be built using Angular framework for fr
 - **As a user**, I want to view data about each planet such as current constellation and time until reaching horizon.
 - **As a user**, I want to store geolocation data for preferences.
 - **As a user**, I want to select a constellation to track.
-- **As a user**, I want to save important dates with notes for review at a later time with an option to edit. (private)
+- **As a user**, I want to save important dates as snapshots with notes for review at a later time with an option to edit. (private)
 - **As a user**, I want to create comments available for view by all users. (public)
 - **As a user**, I want to check out and pay for my subscription securely so that my personal and financial information is safe.
 - **As a user**, I want to review my subscription history so that I can keep track of my monthly payments.
@@ -25,7 +25,7 @@ The planetary application will primarily be built using Angular framework for fr
 - Storing additional geolocation data with ability to change home location
 - View current sky (visible) conditions per location
 - View current data and info about each planet
-- Saving important dates with notes to review
+- Saving important dates as snapshots with notes to review
 - Select a constellation to track
 - Comment section
 - Secure subscription payments which unlock more features/storage space
@@ -36,6 +36,7 @@ The planetary application will primarily be built using Angular framework for fr
 - Implementing an algorithm to sort comments based on date and relevancy to user
 - Adding an admin role that can add, remove, or modify comments
 - Implementing constellation system to provide user with conjunction information (highly depends on what I can do with the frontend, if angular makes manipulating points on a circle easy I could do some interesting stuff)
+- Add capability on front end to compare dates side by side (unsure what is possible in the project timeframe)
 
 ## Tech Stacks
 
@@ -75,5 +76,5 @@ The planetary application will primarily be built using Angular framework for fr
 
 ## Entity Relationship Diagram
 
-![image](https://github.com/052223-java-angular/McLean-p1-Backend/assets/123115057/fd27fd46-3d6b-43c9-9c75-f0f4419ddb3b)
+![image](https://github.com/052223-java-angular/McLean-p1-Backend/assets/123115057/3b06273e-d054-4c84-af12-7f6a47a3e275)
 
