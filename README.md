@@ -11,6 +11,7 @@ The planetary application will primarily be built using Angular framework for fr
 - **As a user**, I want to log in to my account so that I can access my personal notes and saved data.
 - **As a user**, I want to view current sky conditions for my location.
 - **As a user**, I want to view data about each planet such as current constellation and time until reaching horizon.
+- **As a user**, I want to select a planet and determine harmonic in relation to another planet.
 - **As a user**, I want to store geolocation data for preferences.
 - **As a user**, I want to select a constellation to track.
 - **As a user**, I want to save important dates as snapshots with notes for review at a later time with an option to edit. (private)
@@ -26,17 +27,19 @@ The planetary application will primarily be built using Angular framework for fr
 - Storing additional geolocation data with ability to change home location
 - View current sky (visible) conditions per location
 - View current data and info about each planet
+- Select planets to compare harmonically with other planets
 - Saving important dates as snapshots with notes to review
 - Select a constellation to track
 - Comment section
 - Secure subscription payments which unlock more features/storage space
 - Subscription history
+- Informational 'how-to' page with relevant information
 
 ## Stretch Goals
 
 - Implementing an algorithm to sort comments based on date and relevancy to user
 - Adding an admin role that can add, remove, or modify comments
-- Implementing constellation system to provide user with conjunction information (highly depends on what I can do with the frontend, if angular makes manipulating points on a circle easy I could do some interesting stuff)
+- Implementing constellation system to provide user with conjunction/harmonic information (highly depends on what I can do with the frontend, if angular makes manipulating points on a circle easy I could do some interesting stuff)
 - Add capability on front end to compare dates side by side (unsure what is possible in the project timeframe)
 
 ## Tech Stacks
