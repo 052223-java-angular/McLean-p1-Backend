@@ -2,18 +2,18 @@
 
 ## Introduction
 
-The planetary application will primarily be built using Angular framework for frontend and Spring Boot framework for backend. The full stack application will be built on the foundation of Java, HTML, CSS and JavaScript in conjuction with TypeScript and will utilize a PostgreSQL database to store user information, preferences and comments. The aim of the application is to provide the user with quality planetary information all in one place (a difficult task).
+The planetary application will primarily be built using Angular framework for frontend and Spring Boot framework for backend. The full stack application will be built on the foundation of Java, HTML, CSS and JavaScript in conjuction with TypeScript and will utilize a PostgreSQL database to store user information, preferences and comments. The aim of the application is to provide the user with quality planetary information all in one place (a difficult task).  Long term goals for the project include the ability to display both past and future planetary position information - and - the ability to generate and share information gained about the user with the user to enhance their experience.
 
 ## User Stories
 
-- **As a user**, I want to register an account so that I can have a personalized learning experience.
+- **As a user**, I want to register an account so that I can have a personalized experience.
 - **As a user**, I want to log in to my account so that I can access my personal notes and saved data.
 - **As a user**, I want to view current sky conditions for my location.
-- **As a user**, I want to view data about each planet such as current constellation.  
-- **As a user**, I want to store geolocation data for preferences and study.
+- **As a user**, I want to view data about each planet such as current constellation and time until reaching horizon.
+- **As a user**, I want to store geolocation data for preferences.
 - **As a user**, I want to save important dates as snapshots for review at a later time.
-- **As a user**, I want to add favorites attributed to planets for note keeping and tracking thoughts.
-- **As a user**, I want to create comments available for view by all users.
+- **As a user**, I want to add favorites attributed to planets for note keeping and tracking thoughts (private).
+- **As a user**, I want to create comments available for view by all users (public).
 - **As a user**, I want to check out and pay for my subscription securely so that my personal and financial information is safe.
 - **As a user**, I want to review my subscription history so that I can keep track of my monthly payments.
 
@@ -28,7 +28,7 @@ The planetary application will primarily be built using Angular framework for fr
 - Saving important dates to review
 - Adding favorites with notes
 - Comment section
-- Secure payments
+- Secure subscription payments which unlock more features/storage space
 - Subscription history
 
 ## Stretch Goals
