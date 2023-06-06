@@ -76,5 +76,5 @@ The planetary application will primarily be built using Angular framework for fr
 
 ## Entity Relationship Diagram
 
-![image](https://github.com/052223-java-angular/McLean-p1-Backend/assets/123115057/3b06273e-d054-4c84-af12-7f6a47a3e275)
+![image](https://github.com/052223-java-angular/McLean-p1-Backend/assets/123115057/8ae21bae-a9fa-4fb3-8c31-7644e427c38f)
 
