@@ -1,6 +1,8 @@
 package com.revature.p1.controllers;
 
+import com.revature.p1.dtos.requests.NewLoginRequest;
 import com.revature.p1.dtos.requests.NewUserRequest;
+import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.services.UserService;
 import com.revature.p1.utils.custom_exceptions.ResourceConflictException;
 import org.springframework.http.HttpStatus;
@@ -35,8 +37,22 @@ public class AuthController {
             throw new ResourceConflictException("Username is not unique");
         }
 
+        //userService.registerUser(req);
+
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Principal> login(@RequestBody NewLoginRequest req) {
+        //userService to call login method
+        Principal principal = userService.login(req);
+
+        //return a jwt token
+
+
+        //return status
+        return ResponseEntity.status(HttpStatus.OK).body(principal);
     }
 
     @ExceptionHandler({ResourceConflictException.class})
