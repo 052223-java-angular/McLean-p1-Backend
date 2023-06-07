@@ -3,6 +3,7 @@ package com.revature.p1.controllers;
 import com.revature.p1.dtos.requests.NewLoginRequest;
 import com.revature.p1.dtos.requests.NewUserRequest;
 import com.revature.p1.dtos.responses.Principal;
+import com.revature.p1.services.JwtTokenService;
 import com.revature.p1.services.UserService;
 import com.revature.p1.utils.custom_exceptions.ResourceConflictException;
 import org.springframework.http.HttpStatus;
@@ -18,9 +19,11 @@ import java.util.Map;
 public class AuthController {
     //dependency injection from UserService to AuthController
     private final UserService userService;
+    private final JwtTokenService tokenService;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, JwtTokenService tokenService) {
         this.userService = userService;
+        this.tokenService = tokenService;
     }
 
     //there is also @GetMapping("/all"), @PutMapping("/update"), @DeleteMapping("/delete")
@@ -49,9 +52,10 @@ public class AuthController {
         Principal principal = userService.login(req);
 
         //return a jwt token
+        String jwtToken = tokenService.generateToken(principal);
+        principal.setToken(jwtToken);
 
-
-        //return status
+        //return status with body
         return ResponseEntity.status(HttpStatus.OK).body(principal);
     }
 

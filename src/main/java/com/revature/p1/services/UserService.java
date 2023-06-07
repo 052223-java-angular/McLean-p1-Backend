@@ -32,6 +32,8 @@ public class UserService {
                 return new Principal(foundUser);
             }
         }
+        //need to fix
+        return null;
     }
 
 }
