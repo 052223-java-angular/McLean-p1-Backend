@@ -14,7 +14,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    //dependency injection from AuthService to AuthController
+    //dependency injection from UserService to AuthController
     private final UserService userService;
 
     public AuthController(UserService userService) {
