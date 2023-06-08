@@ -21,6 +21,7 @@ public class Principal {
         this.id = user.getId();
         this.username = user.getUsername();
         this.role = user.getRole().getName();
+        //token?
     }
 
 

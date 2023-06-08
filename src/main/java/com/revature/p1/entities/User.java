@@ -28,6 +28,7 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
+    //this connects column role_id in user to role
     @ManyToOne
     @JoinColumn(name = "role_id")
     @JsonBackReference
