@@ -17,8 +17,8 @@ import lombok.Setter;
 public class User {
 
     @Id
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    //@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    //@JsonManagedReference
     private String id;
 
     @Column(name = "username", nullable = false)

@@ -23,4 +23,6 @@ public class Principal {
         this.role = user.getRole().getName();
     }
 
+
+
 }

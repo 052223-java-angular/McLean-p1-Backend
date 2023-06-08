@@ -6,6 +6,7 @@ import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.services.JwtTokenService;
 import com.revature.p1.services.UserService;
 import com.revature.p1.utils.custom_exceptions.ResourceConflictException;
+import com.revature.p1.utils.custom_exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -59,12 +60,20 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.OK).body(principal);
     }
 
-    @ExceptionHandler({ResourceConflictException.class})
+    @ExceptionHandler(ResourceConflictException.class)
     public ResponseEntity<Map<String, Object>> handleResourceConflictException(ResourceConflictException e) {
         Map<String, Object> map = new HashMap<>();
         map.put("timestamp", new Date(System.currentTimeMillis()));
         map.put("message", e.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(map);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleUserNotFoundException(UserNotFoundException e) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("timestamp", new Date(System.currentTimeMillis()));
+        map.put("message", e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(map);
     }
 
 }

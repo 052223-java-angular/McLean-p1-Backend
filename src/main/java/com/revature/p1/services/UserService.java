@@ -4,6 +4,7 @@ import com.revature.p1.dtos.requests.NewLoginRequest;
 import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.entities.User;
 import com.revature.p1.repositories.UserRepository;
+import com.revature.p1.utils.custom_exceptions.UserNotFoundException;
 import org.springframework.stereotype.Service;
 import org.mindrot.jbcrypt.BCrypt;
 import java.util.Optional;
@@ -32,8 +33,8 @@ public class UserService {
                 return new Principal(foundUser);
             }
         }
-        //need to fix
-        return null;
+        //if user not found, throws exception - must handle in controller
+        throw new UserNotFoundException("Invalid Credentials");
     }
 
 }
