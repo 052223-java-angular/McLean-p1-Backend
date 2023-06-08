@@ -41,7 +41,7 @@ public class AuthController {
             throw new ResourceConflictException("Username is not unique");
         }
 
-        //userService.registerUser(req);
+        userService.registerUser(req);
 
 
         return ResponseEntity.status(HttpStatus.CREATED).build();

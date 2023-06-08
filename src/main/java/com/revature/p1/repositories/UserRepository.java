@@ -10,6 +10,8 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
 
+    User save(User user);
+
     //replaces DAO, syntax is always findBy and then the column name
     Optional<User> findByUsername(String username);
 

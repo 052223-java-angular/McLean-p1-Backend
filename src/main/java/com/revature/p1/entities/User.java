@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,5 +32,12 @@ public class User {
     @JoinColumn(name = "role_id")
     @JsonBackReference
     private Role role;
+
+    public User(String username, String password, Role role) {
+        this.id = UUID.randomUUID().toString();
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 
 }
