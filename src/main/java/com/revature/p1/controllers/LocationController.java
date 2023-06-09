@@ -34,7 +34,7 @@ public class LocationController {
 //      TOKEN SERVICE WILL HAVE METHODS TO EXTRACT USER ID OR OTHER INFO TO ALLOW PROCESSING OF REQUESTS
 
     @PostMapping("/create")
-    public ResponseEntity<?> createLocation(@RequestBody NewLocationRequest req, @RequestHeader(name = "authorization") String token) {
+    public ResponseEntity<?> createLocation(@RequestBody NewLocationRequest req, @RequestHeader(name = "authorization", required=true) String token) {
         //need to check token
         //---a token is valid when:
         //------1 - of type jwt
