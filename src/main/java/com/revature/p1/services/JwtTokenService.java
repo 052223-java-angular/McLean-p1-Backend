@@ -1,5 +1,6 @@
 package com.revature.p1.services;
 
+import com.revature.p1.dtos.requests.JwtValidator;
 import com.revature.p1.dtos.responses.Principal;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -60,11 +61,10 @@ public class JwtTokenService {
         return extractClaim(token, Claims::getSubject);
     }
 
-    //method relies on resolution of the above method - required to validate JWT token against the user principal
-    //why does it take in Principal?????
-    public boolean validateToken(String token, Principal userPrincipal) {
+    //method relies on resolution of the above method - required to validate JWT token
+    public boolean validateToken(String token, JwtValidator testValidity) {
         String tokenUsername = extractUsername(token);
-        return tokenUsername.equals(userPrincipal.getUsername());
+        return tokenUsername.equals(testValidity.getUsername());
     }
 
     //seems to be casting returned Claim from extractAllClaims method to String

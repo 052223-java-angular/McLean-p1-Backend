@@ -24,6 +24,4 @@ public class Principal {
         //token?
     }
 
-
-
 }

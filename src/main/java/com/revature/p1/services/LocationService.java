@@ -1,5 +1,6 @@
 package com.revature.p1.services;
 
+import com.revature.p1.dtos.requests.NewLocationRequest;
 import com.revature.p1.entities.Location;
 import com.revature.p1.repositories.LocationRepository;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ public class LocationService {
         this.locationRepo = locationRepo;
     }
 
-    public Location save(Location loc) {
+    public Location save(NewLocationRequest loc) {
         Location newLoc = new Location();
     }
 
