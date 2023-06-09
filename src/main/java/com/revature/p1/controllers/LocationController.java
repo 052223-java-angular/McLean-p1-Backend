@@ -1,6 +1,5 @@
 package com.revature.p1.controllers;
 
-import com.revature.p1.dtos.requests.JwtValidator;
 import com.revature.p1.dtos.requests.NewLocationRequest;
 import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.entities.Location;
@@ -30,32 +29,31 @@ public class LocationController {
         this.roleService = roleService;
     }
 
-//      USE @REQUESTHEADER(NAME = "AUTHORIZATION") string token) AS A PARAMETER TO THESE METHODS TO CHECK ID OF LOGGED IN USER
-//      TOKEN SERVICE WILL HAVE METHODS TO EXTRACT USER ID OR OTHER INFO TO ALLOW PROCESSING OF REQUESTS
-
     @PostMapping("/create")
-    public ResponseEntity<?> createLocation(@RequestBody NewLocationRequest req, @RequestHeader(name = "authorization", required=true) String token) {
+    public ResponseEntity<?> createLocation(@RequestBody NewLocationRequest req, @RequestHeader(name = "Authorization", required=true) String token) {
+
+        System.out.println(token);
+        //printing null name
+        System.out.println(req.getName());
         //need to check token
         //---a token is valid when:
         //------1 - of type jwt
         //------2 - its signature is correct(nobody has changed a content of token)
         //------3 - its not expired   <<<<have not checked for expiration yet
         //------4 - it contains roles and scopes information
-
-        //probably add to helper function for all token validation
         String userId = tokenService.extractUserId(token);
         String username = tokenService.extractUsername(token);
         String role = tokenService.extractUserRole(token);
         Role fullRole = roleService.findByName(role);
-        JwtValidator testValidity = new JwtValidator(userId, username, fullRole);
+        User validUser = new User(fullRole, userId, username);
 
-        //probably need to turn user
+        Principal testValidity = new Principal(validUser);
+
         if(!tokenService.validateToken(token, testValidity)) {
             //add to exception controller
             throw new AccessDeniedException("Access denied.");
         }
 
-        User validUser = new User(fullRole, userId, username);
         //Location newLoc =
         locService.save(req, validUser);
 
