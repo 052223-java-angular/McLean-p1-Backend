@@ -2,6 +2,11 @@ package com.revature.p1.services;
 
 import com.revature.p1.dtos.requests.JwtValidator;
 import com.revature.p1.dtos.responses.Principal;
+import com.revature.p1.entities.Role;
+import com.revature.p1.entities.User;
+import com.revature.p1.repositories.UserRepository;
+import com.revature.p1.utils.custom_exceptions.AccessDeniedException;
+import com.revature.p1.utils.custom_exceptions.RoleNotFoundException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -11,10 +16,17 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
 public class JwtTokenService {
+
+    private UserRepository userRepo;
+
+    public JwtTokenService(UserRepository userRepo) {
+        this.userRepo = userRepo;
+    }
 
     //go to application.properties file for value
     @Value("${jwt.secret}")
@@ -63,8 +75,19 @@ public class JwtTokenService {
 
     //method relies on resolution of the above method - required to validate JWT token
     public boolean validateToken(String token, JwtValidator testValidity) {
+        //everytime client makes an api request, backend should verify BOTH validity of token and presence in DB
         String tokenUsername = extractUsername(token);
-        return tokenUsername.equals(testValidity.getUsername());
+        //returning Optional<User>
+        Optional<User> userOpt = userRepo.findByUsername(tokenUsername);
+        if(userOpt.isEmpty()) {
+            return false;
+        }
+        String validUser = userOpt.get().getId();
+        String validUser2 = userOpt.get().getUsername();
+        Role validUser3 = userOpt.get().getRole();
+        JwtValidator decrypted = new JwtValidator(validUser, validUser2, validUser3);
+        //NEWYORKHEART911
+        return testValidity.equals(decrypted);
     }
 
     //seems to be casting returned Claim from extractAllClaims method to String

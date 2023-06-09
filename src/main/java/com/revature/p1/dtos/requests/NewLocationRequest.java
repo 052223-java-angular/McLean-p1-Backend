@@ -15,7 +15,7 @@ public class NewLocationRequest {
     private double longitude;
     private double latitude;
     //not sure i need a token here
-    private String token;
+    //private String token;
 
 }
 

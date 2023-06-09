@@ -49,4 +49,11 @@ public class User {
         this.role = role;
     }
 
+    //for token validation
+    public User(Role role, String id, String username) {
+        this.id = id;
+        this.username = username;
+        this.role = role;
+    }
+
 }

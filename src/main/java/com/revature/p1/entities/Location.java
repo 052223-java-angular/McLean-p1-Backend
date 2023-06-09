@@ -3,6 +3,8 @@ package com.revature.p1.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "locations")
 public class Location {
@@ -23,5 +25,13 @@ public class Location {
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;
+
+    public Location(String name, double longitude, double latitude, User user) {
+        this.id = UUID.randomUUID().toString();
+        this.name = name;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.user = user;
+    }
 
 }

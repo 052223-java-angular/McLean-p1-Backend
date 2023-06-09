@@ -9,6 +9,7 @@ import com.revature.p1.entities.User;
 import com.revature.p1.services.JwtTokenService;
 import com.revature.p1.services.LocationService;
 import com.revature.p1.services.RoleService;
+import com.revature.p1.utils.custom_exceptions.AccessDeniedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,22 +39,25 @@ public class LocationController {
         //---a token is valid when:
         //------1 - of type jwt
         //------2 - its signature is correct(nobody has changed a content of token)
-        //------3 - its not expired
+        //------3 - its not expired   <<<<have not checked for expiration yet
         //------4 - it contains roles and scopes information
 
-        //probably add to helper function
+        //probably add to helper function for all token validation
         String userId = tokenService.extractUserId(token);
         String username = tokenService.extractUsername(token);
         String role = tokenService.extractUserRole(token);
         Role fullRole = roleService.findByName(role);
         JwtValidator testValidity = new JwtValidator(userId, username, fullRole);
+
+        //probably need to turn user
         if(!tokenService.validateToken(token, testValidity)) {
-            //throw some exception
+            //add to exception controller
+            throw new AccessDeniedException("Access denied.");
         }
 
-        //must validate user identity before processing service request
-        //location needs name(home-auto), long, lat, User
-        Location newLoc = locService.save(req, User);
+        User validUser = new User(fullRole, userId, username);
+        //Location newLoc =
+        locService.save(req, validUser);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
