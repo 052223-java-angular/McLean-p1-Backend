@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -18,8 +20,6 @@ import java.util.UUID;
 public class User {
 
     @Id
-    //@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    //@JsonManagedReference
     private String id;
 
     @Column(name = "username", nullable = false)
@@ -33,6 +33,14 @@ public class User {
     @JoinColumn(name = "role_id")
     @JsonBackReference
     private Role role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Set<Location> locations;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Set<Favorite> favorites;
 
     public User(String username, String password, Role role) {
         this.id = UUID.randomUUID().toString();

@@ -1,6 +1,7 @@
 package com.revature.p1.services;
 
 import com.revature.p1.dtos.responses.Principal;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 @Service
 public class JwtTokenService {
@@ -37,6 +39,41 @@ public class JwtTokenService {
                 //makes signature unique - secret key
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
+    }
+
+    //Claims type imported from io.jsonwebtoken.Claims
+    private Claims extractAllClaims(String token) {
+        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+    }
+
+    //Function imported from java.util.function.Function
+    //method relies on resolution of the above method
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
+
+    //method relies on resolution of the above method
+    //:: is called Method Reference.  It is basically a reference to a single method (it refers to an existing method by name)
+    //getSubject is getting in Claims
+    public String extractUsername(String token) {
+        return extractClaim(token, Claims::getSubject);
+    }
+
+    //method relies on resolution of the above method - required to validate JWT token against the user principal
+    public boolean validateToken(String token, Principal userPrincipal) {
+        String tokenUsername = extractUsername(token);
+        return tokenUsername.equals(userPrincipal.getUsername());
+    }
+
+    //seems to be casting returned Claim from extractAllClaims method to String
+    //using from Claims -> <T> T get(String var1, Class<T> var2)
+    public String extractUserId(String token) {
+        return (String) extractAllClaims(token).get("id");
+    }
+
+    public String extractUserRole(String token) {
+        return (String) extractAllClaims(token).get("role");
     }
 
 }

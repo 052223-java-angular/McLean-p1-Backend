@@ -29,7 +29,7 @@ public class RoleService {
     //returns Role by role name since role_id column of User entity is of type Role
     public Role findByName(String name) {
         //.orElseThrow() is optional class method. If there is no value present in this Optional instance,
-        //then this method throws the exception generated from the specified supplier.
+        //then this method throws the exception generated from the specified supplier. --lambda expression
         return roleRepo.findByName(name).orElseThrow(() -> new RoleNotFoundException("Role " + name + " not found."));
     }
 
