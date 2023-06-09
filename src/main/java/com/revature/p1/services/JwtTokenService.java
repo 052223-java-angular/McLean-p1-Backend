@@ -61,6 +61,7 @@ public class JwtTokenService {
     }
 
     //method relies on resolution of the above method - required to validate JWT token against the user principal
+    //why does it take in Principal?????
     public boolean validateToken(String token, Principal userPrincipal) {
         String tokenUsername = extractUsername(token);
         return tokenUsername.equals(userPrincipal.getUsername());
