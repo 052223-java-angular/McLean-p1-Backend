@@ -56,4 +56,8 @@ public class User {
         this.role = role;
     }
 
+    public User(String id) {
+        this.id = id;
+    }
+
 }

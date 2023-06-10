@@ -59,10 +59,22 @@ public class LocationController {
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+    @GetMapping("/read")
+    public ResponseEntity<List<Location>> getLocation(@RequestHeader(name="Authorization") String token) {
+        String username = tokenService.extractUsername(token);
+        Principal testValidity = new Principal();
+        testValidity.setUsername(username);
+        if(!tokenService.validateToken(token, testValidity)) {
+            //add to exception controller
+            throw new AccessDeniedException("Access denied.");
+        }
+        String userId = tokenService.extractUserId(token);
+        User existingUser = new User(userId);
+        List<Location> retrievedLocs = locService.findByUser(existingUser);
+        return ResponseEntity.status(HttpStatus.OK).body(retrievedLocs);
+    }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<List<Location>> getLocation(@RequestBody GetLocationsById req) {
-//        return ResponseEntity.status(HttpStatus.OK).build();
-//    }
+    //need to add one for update after auto set home loc
+    //@PathVariable("urlParameter") String urlParameter
 
 }

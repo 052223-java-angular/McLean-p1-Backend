@@ -6,6 +6,8 @@ import com.revature.p1.entities.User;
 import com.revature.p1.repositories.LocationRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LocationService {
 
@@ -18,6 +20,10 @@ public class LocationService {
     public Location save(NewLocationRequest loc, User user) {
         Location newLoc = new Location(loc.getName(), loc.getLongitude(), loc.getLatitude(), user);
         return locationRepo.save(newLoc);
+    }
+
+    public List<Location> findByUser(User user) {
+        return locationRepo.findByUser(user);
     }
 
 
