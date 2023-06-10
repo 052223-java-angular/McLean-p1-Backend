@@ -61,6 +61,16 @@ public class LocationController {
     }
     @GetMapping("/read")
     public ResponseEntity<List<Location>> getLocation(@RequestHeader(name="Authorization") String token) {
+        User existingUser = tokenValidator(token);
+        List<Location> retrievedLocs = locService.findByUser(existingUser);
+        return ResponseEntity.status(HttpStatus.OK).body(retrievedLocs);
+    }
+
+    //need to add one for update after auto set home loc
+    //@PathVariable("urlParameter") String urlParameter
+
+    //--------helper---------
+    private User tokenValidator(String token) {
         String username = tokenService.extractUsername(token);
         Principal testValidity = new Principal();
         testValidity.setUsername(username);
@@ -70,11 +80,7 @@ public class LocationController {
         }
         String userId = tokenService.extractUserId(token);
         User existingUser = new User(userId);
-        List<Location> retrievedLocs = locService.findByUser(existingUser);
-        return ResponseEntity.status(HttpStatus.OK).body(retrievedLocs);
+        return existingUser;
     }
-
-    //need to add one for update after auto set home loc
-    //@PathVariable("urlParameter") String urlParameter
 
 }
