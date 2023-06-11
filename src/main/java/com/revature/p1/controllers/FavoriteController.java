@@ -24,15 +24,7 @@ public class FavoriteController {
 
     @PostMapping("/create")
     public ResponseEntity<?> createFavorite(@RequestBody NewFavoriteRequest req, @RequestHeader(name="Authorization", required=true) String token) {
-        String username = tokenService.extractUsername(token);
-        Principal testValidity = new Principal();
-        testValidity.setUsername(username);
-        if(!tokenService.validateToken(token, testValidity)) {
-            //add to exception controller
-            throw new AccessDeniedException("Access denied.");
-        }
-        String userId = tokenService.extractUserId(token);
-        User existingUser = new User(userId);
+        User existingUser = tokenValidator(token);
 
         //depends on if I want to return the saved record Favorite fav =
         favoriteService.save(req, existingUser);
@@ -42,6 +34,15 @@ public class FavoriteController {
 
     @GetMapping("/read")
     public ResponseEntity<Favorite> readFavorite(@RequestHeader(name="Authorization", required=true) String token) {
+        User existingUser = tokenValidator(token);
+
+        //returning favorite id, should not happen
+        Favorite retrievedFav = favoriteService.findByUser(existingUser);
+        return ResponseEntity.status(HttpStatus.OK).body(retrievedFav);
+    }
+
+    //--------helper---------
+    private User tokenValidator(String token) {
         String username = tokenService.extractUsername(token);
         Principal testValidity = new Principal();
         testValidity.setUsername(username);
@@ -51,9 +52,7 @@ public class FavoriteController {
         }
         String userId = tokenService.extractUserId(token);
         User existingUser = new User(userId);
-        //returning favorite id, should not happen
-        Favorite retrievedFav = favoriteService.findByUser(existingUser);
-        return ResponseEntity.status(HttpStatus.OK).body(retrievedFav);
+        return existingUser;
     }
 
 

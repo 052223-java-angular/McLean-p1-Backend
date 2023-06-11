@@ -42,6 +42,10 @@ public class User {
     @JsonManagedReference
     private Set<Favorite> favorites;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Set<Comment> comments;
+
     public User(String username, String password, Role role) {
         this.id = UUID.randomUUID().toString();
         this.username = username;
