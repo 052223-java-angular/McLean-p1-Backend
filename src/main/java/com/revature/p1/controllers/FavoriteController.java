@@ -51,6 +51,7 @@ public class FavoriteController {
         }
         String userId = tokenService.extractUserId(token);
         User existingUser = new User(userId);
+        //returning favorite id, should not happen
         Favorite retrievedFav = favoriteService.findByUser(existingUser);
         return ResponseEntity.status(HttpStatus.OK).body(retrievedFav);
     }
