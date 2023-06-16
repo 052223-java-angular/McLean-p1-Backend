@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/favorites")
 public class FavoriteController {
@@ -38,7 +39,6 @@ public class FavoriteController {
     public ResponseEntity<Favorite> readFavorite(@RequestHeader(name="auth-token", required=true) String token) {
         User existingUser = tokenValidator(token);
 
-        //returning favorite id, should not happen
         Favorite retrievedFav = favoriteService.findByUser(existingUser);
 
         String responseHeaderKey = "auth-token";
