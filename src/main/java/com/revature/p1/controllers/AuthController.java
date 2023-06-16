@@ -54,10 +54,11 @@ public class AuthController {
 
         //return a jwt token
         String jwtToken = tokenService.generateToken(principal);
-        principal.setToken(jwtToken);
+        String responseHeaderKey = "auth-token";
+        String responseHeaderValue = jwtToken;
 
         //return status with body
-        return ResponseEntity.status(HttpStatus.OK).body(principal);
+        return ResponseEntity.status(HttpStatus.OK).header(responseHeaderKey, responseHeaderValue).body(principal);
     }
 
 }

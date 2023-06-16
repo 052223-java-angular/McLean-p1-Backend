@@ -30,12 +30,8 @@ public class LocationController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createLocation(@RequestBody NewLocationRequest req, @RequestHeader(name = "Authorization", required=true) String token) {
+    public ResponseEntity<?> createLocation(@RequestBody NewLocationRequest req, @RequestHeader(name = "auth-token", required=true) String token) {
 
-        System.out.println(token);
-        //printing null name
-        System.out.println(req.getName());
-        //need to check token
         //---a token is valid when:
         //------1 - of type jwt
         //------2 - its signature is correct(nobody has changed a content of token)
@@ -56,14 +52,17 @@ public class LocationController {
 
         //Location newLoc =
         locService.save(req, validUser);
-
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        String responseHeaderKey = "auth-token";
+        String responseHeaderValue = token;
+        return ResponseEntity.status(HttpStatus.CREATED).header(responseHeaderKey, responseHeaderValue).build();
     }
     @GetMapping("/read")
-    public ResponseEntity<List<Location>> getLocation(@RequestHeader(name="Authorization") String token) {
+    public ResponseEntity<List<Location>> getLocation(@RequestHeader(name="auth-token", required=true) String token) {
         User existingUser = tokenValidator(token);
         List<Location> retrievedLocs = locService.findByUser(existingUser);
-        return ResponseEntity.status(HttpStatus.OK).body(retrievedLocs);
+        String responseHeaderKey = "auth-token";
+        String responseHeaderValue = token;
+        return ResponseEntity.status(HttpStatus.OK).header(responseHeaderKey, responseHeaderValue).body(retrievedLocs);
     }
 
     //need to add one for update after auto set home loc

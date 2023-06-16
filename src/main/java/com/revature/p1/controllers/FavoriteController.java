@@ -23,22 +23,27 @@ public class FavoriteController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createFavorite(@RequestBody NewFavoriteRequest req, @RequestHeader(name="Authorization", required=true) String token) {
+    public ResponseEntity<?> createFavorite(@RequestBody NewFavoriteRequest req, @RequestHeader(name="auth-token", required=true) String token) {
         User existingUser = tokenValidator(token);
 
         //depends on if I want to return the saved record Favorite fav =
         favoriteService.save(req, existingUser);
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        String responseHeaderKey = "auth-token";
+        String responseHeaderValue = token;
+        return ResponseEntity.status(HttpStatus.CREATED).header(responseHeaderKey, responseHeaderValue).build();
     }
 
     @GetMapping("/read")
-    public ResponseEntity<Favorite> readFavorite(@RequestHeader(name="Authorization", required=true) String token) {
+    public ResponseEntity<Favorite> readFavorite(@RequestHeader(name="auth-token", required=true) String token) {
         User existingUser = tokenValidator(token);
 
         //returning favorite id, should not happen
         Favorite retrievedFav = favoriteService.findByUser(existingUser);
-        return ResponseEntity.status(HttpStatus.OK).body(retrievedFav);
+
+        String responseHeaderKey = "auth-token";
+        String responseHeaderValue = token;
+        return ResponseEntity.status(HttpStatus.OK).header(responseHeaderKey, responseHeaderValue).body(retrievedFav);
     }
 
     //--------helper---------
