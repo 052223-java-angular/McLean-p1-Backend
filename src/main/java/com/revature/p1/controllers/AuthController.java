@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@CrossOrigin
+@CrossOrigin(exposedHeaders = {"auth-token"})
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -51,9 +51,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<Principal> login(@RequestBody NewLoginRequest req) {
         //userService to call login method
+        //might need to return role type to front end?
         Principal principal = userService.login(req);
 
-        //return a jwt token
+        //return a jwt token in header
         String jwtToken = tokenService.generateToken(principal);
         String responseHeaderKey = "auth-token";
         String responseHeaderValue = jwtToken;
