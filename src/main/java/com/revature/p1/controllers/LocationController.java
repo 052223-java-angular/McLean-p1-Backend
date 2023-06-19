@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(exposedHeaders = {"auth-token"})
 @RestController
 @RequestMapping("/locations")
 public class LocationController {

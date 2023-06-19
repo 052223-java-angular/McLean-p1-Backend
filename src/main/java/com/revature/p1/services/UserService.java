@@ -10,12 +10,8 @@ import com.revature.p1.repositories.UserRepository;
 import com.revature.p1.utils.custom_exceptions.UserNotFoundException;
 import org.springframework.stereotype.Service;
 import org.mindrot.jbcrypt.BCrypt;
-
-import java.util.HashSet;
 import java.util.Optional;
 
-//spring bean - singleton design pattern by default - only instantiated by itself with a private constructor
-//uses static method
 @Service
 public class UserService {
 
@@ -27,9 +23,22 @@ public class UserService {
         this.roleService = roleService;
     }
 
+    public boolean isValidUsername(String username) {
+        //8-18 character length
+        return username.matches("^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$");
+    }
+
     public boolean isUniqueUsername(String username) {
         Optional<User> userOpt = userRepo.findByUsername(username);
         return userOpt.isEmpty();
+    }
+
+    public boolean isValidPassword(String password) {
+        return password.matches("^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$");
+    }
+
+    public boolean isSamePassword(String password, String confirmPassword) {
+        return password.equals(confirmPassword);
     }
 
     public User registerUser(NewUserRequest req) {

@@ -11,15 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 @CrossOrigin(exposedHeaders = {"auth-token"})
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    //dependency injection from UserService to AuthController
     private final UserService userService;
     private final JwtTokenService tokenService;
 
@@ -32,14 +27,20 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody NewUserRequest req) {
         //^^dto = data transfer object (the NewUserRequest part)
-        //check for valid username
-        //check for unique username
-        //check for valid password
-        //check password confirmation
-
+        if(!userService.isValidUsername(req.getUsername())) {
+            //need to find a better regex
+            throw new ResourceConflictException("Username must contain between 8 and 18 characters.");
+        }
         if(!userService.isUniqueUsername(req.getUsername())) {
             //thrown exception matches handler with tag ResourceConflictException.class
             throw new ResourceConflictException("Username is not unique");
+        }
+        if(!userService.isValidPassword(req.getPassword())) {
+            //need to find a better regex
+            throw new ResourceConflictException("Password must contain between 8 and 18 characters.");
+        }
+        if(!userService.isSamePassword(req.getPassword(), req.getConfirmPassword())) {
+            throw new ResourceConflictException("Passwords must match.");
         }
 
         userService.registerUser(req);

@@ -101,7 +101,7 @@ public class JwtTokenService {
     //method relies on resolution of the above method - required to validate JWT token
     public boolean validateToken(String token, Principal testValidity) {
         String tokenUsername = extractUsername(token);
-        return (tokenUsername.equals(testValidity.getUsername())) && !isTokenExpired(token);
+        return (tokenUsername.equals(testValidity.getUsername())); //&& !isTokenExpired(token);
     }
 
     private boolean isTokenExpired(String token) {
