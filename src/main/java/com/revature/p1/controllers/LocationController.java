@@ -3,11 +3,11 @@ package com.revature.p1.controllers;
 import com.revature.p1.dtos.requests.NewLocationRequest;
 import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.entities.Location;
-import com.revature.p1.entities.Role;
 import com.revature.p1.entities.User;
 import com.revature.p1.services.JwtTokenService;
 import com.revature.p1.services.LocationService;
 import com.revature.p1.services.RoleService;
+import com.revature.p1.services.UserService;
 import com.revature.p1.utils.custom_exceptions.AccessDeniedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,47 +15,47 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(exposedHeaders = {"auth-token"})
 @RestController
 @RequestMapping("/locations")
 public class LocationController {
 
     private final LocationService locService;
     private final JwtTokenService tokenService;
-    private final RoleService roleService;
+    private final UserService userService;
 
-    public LocationController(LocationService locService, JwtTokenService tokenService, RoleService roleService) {
+    public LocationController(LocationService locService, JwtTokenService tokenService, UserService userService) {
         this.locService = locService;
         this.tokenService = tokenService;
-        this.roleService = roleService;
+        this.userService = userService;
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createLocation(@RequestBody NewLocationRequest req, @RequestHeader(name = "auth-token", required=true) String token) {
+    public ResponseEntity<?> createLocation(@RequestBody NewLocationRequest req) {
 
         //---a token is valid when:
         //------1 - of type jwt
         //------2 - its signature is correct(nobody has changed a content of token)
         //------3 - its not expired   <<<<have not checked for expiration yet
         //------4 - it contains roles and scopes information
-        String userId = tokenService.extractUserId(token);
-        String username = tokenService.extractUsername(token);
-        String role = tokenService.extractUserRole(token);
-        Role fullRole = roleService.findByName(role);
-        User validUser = new User(fullRole, userId, username);
 
-        Principal testValidity = new Principal(validUser);
-
-        if(!tokenService.validateToken(token, testValidity)) {
-            //add to exception controller
-            throw new AccessDeniedException("Access denied.");
+        // Checks if the user provides a token
+        if (req.getToken() == null || req.getToken().isEmpty()) {
+            // TODO: create a custom token exception class
+            throw new RuntimeException("No token provided!");
         }
 
-        //Location newLoc =
-        locService.save(req, validUser);
-        String responseHeaderKey = "auth-token";
-        String responseHeaderValue = token;
-        return ResponseEntity.status(HttpStatus.CREATED).header(responseHeaderKey, responseHeaderValue).build();
+        String token = req.getToken();
+
+        // Check if the token is valid
+        if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
+            throw new RuntimeException("Invalid token!");
+        }
+
+        String userId = tokenService.extractUserId(token);
+        User foundUser = userService.findUserById(userId);
+        locService.save(req, foundUser);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @GetMapping("/read")
     public ResponseEntity<List<Location>> getLocation(@RequestHeader(name="auth-token", required=true) String token) {

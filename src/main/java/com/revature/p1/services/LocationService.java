@@ -17,15 +17,17 @@ public class LocationService {
         this.locationRepo = locationRepo;
     }
 
-    public Location save(NewLocationRequest loc, User user) {
-        Location newLoc = new Location(loc.getName(), loc.getLongitude(), loc.getLatitude(), user);
-        return locationRepo.save(newLoc);
+    public Location save(NewLocationRequest req, User foundUser) {
+        Location newLocation = new Location(req.getName(), req.getLongitude(), req.getLatitude(), foundUser);
+        return locationRepo.save(newLocation);
     }
+    public Location save(Location location) {
+        return locationRepo.save(location);
+    }
+
 
     public List<Location> findByUser(User user) {
         return locationRepo.findByUser(user);
     }
-
-
 
 }

@@ -3,6 +3,7 @@ package com.revature.p1.services;
 import com.revature.p1.dtos.requests.NewLoginRequest;
 import com.revature.p1.dtos.requests.NewUserRequest;
 import com.revature.p1.dtos.responses.Principal;
+import com.revature.p1.entities.Location;
 import com.revature.p1.entities.Role;
 import com.revature.p1.entities.User;
 import com.revature.p1.repositories.RoleRepository;
@@ -17,10 +18,12 @@ public class UserService {
 
     private final UserRepository userRepo;
     private final RoleService roleService;
+    private final LocationService locationService;
 
-    public UserService(UserRepository userRepo, RoleService roleService) {
+    public UserService(UserRepository userRepo, RoleService roleService, LocationService locationService) {
         this.userRepo = userRepo;
         this.roleService = roleService;
+        this.locationService = locationService;
     }
 
     public boolean isValidUsername(String username) {
@@ -48,7 +51,15 @@ public class UserService {
         String hashed = BCrypt.hashpw(req.getPassword(), BCrypt.gensalt());
 
         User newUser = new User(req.getUsername(), hashed, defaultRole);
-        return userRepo.save(newUser);
+
+        // save the user
+        userRepo.save(newUser);
+
+        // user is now in the db, so we link the location by user
+        Location newLocation = new Location("home", req.getLongitude(), req.getLatitude(), newUser);
+        locationService.save(newLocation);
+
+        return newUser;
     }
 
     public Principal login(NewLoginRequest req) {
@@ -63,4 +74,13 @@ public class UserService {
         throw new UserNotFoundException("Invalid Credentials");
     }
 
+    public User findUserById(String userId) {
+        Optional<User> userOpt = userRepo.findById(userId);
+
+        if (userOpt.isPresent()) {
+            return userOpt.get();
+        }
+
+        throw new UserNotFoundException("User not found!");
+    }
 }

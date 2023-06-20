@@ -4,6 +4,7 @@ import com.revature.p1.dtos.requests.NewLoginRequest;
 import com.revature.p1.dtos.requests.NewUserRequest;
 import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.services.JwtTokenService;
+import com.revature.p1.services.LocationService;
 import com.revature.p1.services.UserService;
 import com.revature.p1.utils.custom_exceptions.ResourceConflictException;
 import com.revature.p1.utils.custom_exceptions.UserNotFoundException;
@@ -57,11 +58,11 @@ public class AuthController {
 
         //return a jwt token in header
         String jwtToken = tokenService.generateToken(principal);
-        String responseHeaderKey = "auth-token";
-        String responseHeaderValue = jwtToken;
+        principal.setToken(jwtToken);
 
         //return status with body
-        return ResponseEntity.status(HttpStatus.OK).header(responseHeaderKey, responseHeaderValue).body(principal);
+        return ResponseEntity.status(HttpStatus.OK).body(principal);
     }
+
 
 }
