@@ -6,7 +6,6 @@ import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.entities.Location;
 import com.revature.p1.entities.Role;
 import com.revature.p1.entities.User;
-import com.revature.p1.repositories.RoleRepository;
 import com.revature.p1.repositories.UserRepository;
 import com.revature.p1.utils.custom_exceptions.UserNotFoundException;
 import org.springframework.stereotype.Service;

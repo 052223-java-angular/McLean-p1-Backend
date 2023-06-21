@@ -1,22 +1,12 @@
 package com.revature.p1.services;
 
 import com.revature.p1.dtos.responses.Principal;
-import com.revature.p1.entities.Role;
-import com.revature.p1.entities.User;
 import com.revature.p1.repositories.UserRepository;
-import com.revature.p1.utils.custom_exceptions.AccessDeniedException;
-import com.revature.p1.utils.custom_exceptions.RoleNotFoundException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import javax.crypto.spec.SecretKeySpec;
-import java.nio.charset.StandardCharsets;
-import java.security.Key;
 import java.util.*;
 import java.util.function.Function;
 
@@ -101,11 +91,7 @@ public class JwtTokenService {
     //method relies on resolution of the above method - required to validate JWT token
     public boolean validateToken(String token, Principal testValidity) {
         String tokenUsername = extractUsername(token);
-        return (tokenUsername.equals(testValidity.getUsername())); //&& !isTokenExpired(token);
-    }
-
-    private boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
+        return (tokenUsername.equals(testValidity.getUsername()));
     }
 
     private Date extractExpiration(String token) {

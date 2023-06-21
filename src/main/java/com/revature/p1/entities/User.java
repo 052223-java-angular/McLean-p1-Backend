@@ -46,6 +46,10 @@ public class User {
     @JsonManagedReference
     private Set<Comment> comments;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Set<Date> dates;
+
     public User(String username, String password, Role role) {
         this.id = UUID.randomUUID().toString();
         this.username = username;
@@ -53,7 +57,6 @@ public class User {
         this.role = role;
     }
 
-    //for token validation
     public User(Role role, String id, String username) {
         this.id = id;
         this.username = username;

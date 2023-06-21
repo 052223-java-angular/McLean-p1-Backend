@@ -15,4 +15,5 @@ public class NewLoginRequest {
     private String password;
     private double longitude;
     private double latitude;
+
 }

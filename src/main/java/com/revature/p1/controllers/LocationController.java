@@ -6,15 +6,14 @@ import com.revature.p1.entities.Location;
 import com.revature.p1.entities.User;
 import com.revature.p1.services.JwtTokenService;
 import com.revature.p1.services.LocationService;
-import com.revature.p1.services.RoleService;
 import com.revature.p1.services.UserService;
 import com.revature.p1.utils.custom_exceptions.AccessDeniedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/locations")
 public class LocationController {
@@ -31,12 +30,6 @@ public class LocationController {
 
     @PostMapping("/create")
     public ResponseEntity<?> createLocation(@RequestBody NewLocationRequest req) {
-
-        //---a token is valid when:
-        //------1 - of type jwt
-        //------2 - its signature is correct(nobody has changed a content of token)
-        //------3 - its not expired   <<<<have not checked for expiration yet
-        //------4 - it contains roles and scopes information
 
         // Checks if the user provides a token
         if (req.getToken() == null || req.getToken().isEmpty()) {

@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(exposedHeaders = {"auth-token"})
+@CrossOrigin
 @RestController
 @RequestMapping("/favorites")
 public class FavoriteController {
@@ -24,7 +24,7 @@ public class FavoriteController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createFavorite(@RequestBody NewFavoriteRequest req, @RequestHeader(name="auth-token", required=true) String token) {
+    public ResponseEntity<?> createFavorite(@RequestBody NewFavoriteRequest req) {
         User existingUser = tokenValidator(token);
 
         //depends on if I want to return the saved record Favorite fav =
