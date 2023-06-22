@@ -1,7 +1,6 @@
 package com.revature.p1.controllers;
 
 import com.revature.p1.dtos.requests.NewLocationRequest;
-import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.entities.Location;
 import com.revature.p1.entities.User;
 import com.revature.p1.services.JwtTokenService;
@@ -41,6 +40,7 @@ public class LocationController {
 
         // Check if the token is valid
         if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
+            //access denied token
             throw new RuntimeException("Invalid token!");
         }
 
@@ -50,30 +50,31 @@ public class LocationController {
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
     @GetMapping("/read")
-    public ResponseEntity<List<Location>> getLocation(@RequestHeader(name="auth-token", required=true) String token) {
-        User existingUser = tokenValidator(token);
-        List<Location> retrievedLocs = locService.findByUser(existingUser);
-        String responseHeaderKey = "auth-token";
-        String responseHeaderValue = token;
-        return ResponseEntity.status(HttpStatus.OK).header(responseHeaderKey, responseHeaderValue).body(retrievedLocs);
+    public ResponseEntity<List<Location>> getLocation(@RequestBody NewLocationRequest req) {
+
+        // Checks if the user provides a token
+        if (req.getToken() == null || req.getToken().isEmpty()) {
+            // TODO: create a custom token exception class
+            throw new RuntimeException("No token provided!");
+        }
+
+        String token = req.getToken();
+
+        // Check if the token is valid
+        if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
+            throw new RuntimeException("Invalid token!");
+        }
+
+        String userId = tokenService.extractUserId(token);
+        User foundUser = userService.findUserById(userId);
+
+        List<Location> retrievedLocs = locService.findByUser(foundUser);
+        return ResponseEntity.status(HttpStatus.OK).body(retrievedLocs);
     }
 
     //need to add one for update after auto set home loc
     //@PathVariable("urlParameter") String urlParameter
-
-    //--------helper---------
-    private User tokenValidator(String token) {
-        String username = tokenService.extractUsername(token);
-        Principal testValidity = new Principal();
-        testValidity.setUsername(username);
-        if(!tokenService.validateToken(token, testValidity)) {
-            //add to exception controller
-            throw new AccessDeniedException("Access denied.");
-        }
-        String userId = tokenService.extractUserId(token);
-        User existingUser = new User(userId);
-        return existingUser;
-    }
 
 }

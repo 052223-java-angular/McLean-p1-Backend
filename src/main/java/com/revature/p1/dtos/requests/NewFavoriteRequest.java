@@ -12,5 +12,6 @@ import lombok.Setter;
 public class NewFavoriteRequest {
 
     private String constellation;
+    private String token;
 
 }

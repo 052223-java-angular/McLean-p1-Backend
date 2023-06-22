@@ -41,8 +41,8 @@ public class AuthController {
             throw new ResourceConflictException("Passwords must match.");
         }
 
+        //registers user and set's current long/lat as 'home'
         userService.registerUser(req);
-
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -59,6 +59,5 @@ public class AuthController {
         //return status with body
         return ResponseEntity.status(HttpStatus.OK).body(principal);
     }
-
 
 }
