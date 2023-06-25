@@ -17,4 +17,5 @@ public class NewUserRequest {
     private String name;
     private double longitude;
     private double latitude;
+
 }

@@ -30,18 +30,14 @@ public class LocationController {
     @PostMapping("/create")
     public ResponseEntity<?> createLocation(@RequestBody NewLocationRequest req) {
 
-        // Checks if the user provides a token
         if (req.getToken() == null || req.getToken().isEmpty()) {
-            // TODO: create a custom token exception class
-            throw new RuntimeException("No token provided!");
+            throw new AccessDeniedException("No token provided!");
         }
 
         String token = req.getToken();
 
-        // Check if the token is valid
         if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
-            //access denied token
-            throw new RuntimeException("Invalid token!");
+            throw new AccessDeniedException("Invalid token!");
         }
 
         String userId = tokenService.extractUserId(token);
@@ -54,17 +50,14 @@ public class LocationController {
     @GetMapping("/read")
     public ResponseEntity<List<Location>> getLocation(@RequestBody NewLocationRequest req) {
 
-        // Checks if the user provides a token
         if (req.getToken() == null || req.getToken().isEmpty()) {
-            // TODO: create a custom token exception class
-            throw new RuntimeException("No token provided!");
+            throw new AccessDeniedException("No token provided!");
         }
 
         String token = req.getToken();
 
-        // Check if the token is valid
         if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
-            throw new RuntimeException("Invalid token!");
+            throw new AccessDeniedException("Invalid token!");
         }
 
         String userId = tokenService.extractUserId(token);

@@ -29,24 +29,19 @@ public class FavoriteController {
     @PostMapping("/create")
     public ResponseEntity<?> createFavorite(@RequestBody NewFavoriteRequest req) {
 
-        // Checks if the user provides a token
         if (req.getToken() == null || req.getToken().isEmpty()) {
-            // TODO: create a custom token exception class
-            throw new RuntimeException("No token provided!");
+            throw new AccessDeniedException("No token provided!");
         }
 
         String token = req.getToken();
 
-        // Check if the token is valid
         if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
-            throw new RuntimeException("Invalid token!");
+            throw new AccessDeniedException("Invalid token!");
         }
 
         String userId = tokenService.extractUserId(token);
         User foundUser = userService.findUserById(userId);
 
-
-        //depends on if I want to return the saved record Favorite fav =
         favoriteService.save(req, foundUser);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -55,17 +50,14 @@ public class FavoriteController {
     @GetMapping("/read")
     public ResponseEntity<Favorite> readFavorite(@RequestBody NewFavoriteRequest req) {
 
-        // Checks if the user provides a token
         if (req.getToken() == null || req.getToken().isEmpty()) {
-            // TODO: create a custom token exception class
-            throw new RuntimeException("No token provided!");
+            throw new AccessDeniedException("No token provided!");
         }
 
         String token = req.getToken();
 
-        // Check if the token is valid
         if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
-            throw new RuntimeException("Invalid token!");
+            throw new AccessDeniedException("Invalid token!");
         }
 
         String userId = tokenService.extractUserId(token);
