@@ -29,28 +29,28 @@ public class Date {
     private long created_at;
 
     @Column
-    private String mercury_const;
+    private double mercury_phase;
 
     @Column
-    private String venus_const;
+    private double venus_phase;
 
     @Column
-    private String mars_const;
+    private double mars_phase;
 
     @Column
-    private String jupiter_const;
+    private double jupiter_phase;
 
     @Column
-    private String saturn_const;
+    private double saturn_phase;
 
     @Column
-    private String uranus_const;
+    private double uranus_phase;
 
     @Column
-    private String neptune_const;
+    private double neptune_phase;
 
     @Column
-    private String pluto_const;
+    private double pluto_phase;
 
     @ManyToOne
     @JoinColumn(name="user_id")
@@ -61,18 +61,18 @@ public class Date {
     @JsonManagedReference
     private Set<Note> notes;
 
-    public Date(String name, long created_at, String mercury_const, String venus_const, String mars_const, String jupiter_const, String saturn_const, String uranus_const, String neptune_const, String pluto_const, User user) {
+    public Date(String name, long created_at, double mercury_phase, double venus_phase, double mars_phase, double jupiter_phase, double saturn_phase, double uranus_phase, double neptune_phase, double pluto_phase, User user) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.created_at = created_at;
-        this.mercury_const = mercury_const;
-        this.venus_const = venus_const;
-        this.mars_const = mars_const;
-        this.jupiter_const = jupiter_const;
-        this.saturn_const = saturn_const;
-        this.uranus_const = uranus_const;
-        this.neptune_const = neptune_const;
-        this.pluto_const = pluto_const;
+        this.mercury_phase = mercury_phase;
+        this.venus_phase = venus_phase;
+        this.mars_phase = mars_phase;
+        this.jupiter_phase = jupiter_phase;
+        this.saturn_phase = saturn_phase;
+        this.uranus_phase = uranus_phase;
+        this.neptune_phase = neptune_phase;
+        this.pluto_phase = pluto_phase;
         this.user = user;
     }
 
