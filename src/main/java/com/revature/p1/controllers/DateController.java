@@ -49,21 +49,21 @@ public class DateController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/read")
-    public ResponseEntity<?> getDates(@RequestBody NewDateRequest req) {
+    @GetMapping("/read/{id}")
+    public ResponseEntity<List<Date>> getDates(@RequestBody NewDateRequest req, @PathVariable("id") String id) {
 
-        if (req.getToken() == null || req.getToken().isEmpty()) {
-            throw new AccessDeniedException("No token provided!");
-        }
+//        if (req.getToken() == null || req.getToken().isEmpty()) {
+//            throw new AccessDeniedException("No token provided!");
+//        }
+//
+//        String token = req.getToken();
+//
+//        if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
+//            throw new AccessDeniedException("Invalid token!");
+//        }
 
-        String token = req.getToken();
-
-        if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
-            throw new AccessDeniedException("Invalid token!");
-        }
-
-        String userId = tokenService.extractUserId(token);
-        User foundUser = userService.findUserById(userId);
+        //String userId = tokenService.extractUserId(token);
+        User foundUser = userService.findUserById(id);
 
         List<Date> retrievedDates = dateService.findByUser(foundUser);
         return ResponseEntity.status(HttpStatus.OK).body(retrievedDates);
