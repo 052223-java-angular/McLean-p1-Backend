@@ -6,7 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,5 +28,11 @@ public class Role {
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<User> users;
+
+    public Role(String name) {
+        this.id = UUID.randomUUID().toString();
+        this.name = name;
+        this.users = new HashSet<>();
+    }
 
 }

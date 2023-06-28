@@ -9,13 +9,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class NewUserRequest {
+public class NewFavoriteRequest {
 
-    private String username;
-    private String password;
-    private String confirmPassword;
-    private String name;
-    private double longitude;
-    private double latitude;
+    private String constellation;
+    private String token;
 
 }
