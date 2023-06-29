@@ -47,7 +47,7 @@ jobs:
           # The name of your Elastic Beanstalk environment
           environment_name: p1-env
           # A unique version label for the deployment
-          version_label: version-0.0.${{github.run_number}}
+          version_label: 1.0.${{github.run_number}}
           # The AWS region your Elastic Beanstalk application is hosted in
           region: us-east-1
           # The jar file that will be deployed to Elastic Beanstalk - after mvn clean install
