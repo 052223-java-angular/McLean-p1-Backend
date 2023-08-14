@@ -64,5 +64,39 @@ public class CommentController {
     }
 
     //update+delete
+    @PutMapping("/comment/{id}")
+    public ResponseEntity<Comment> updateComment(@PathVariable(name="id") String id, @RequestBody NewCommentRequest req, @RequestHeader(name = "auth-token") String token) {
+
+        if (token == null || token.isEmpty()) {
+            throw new AccessDeniedException("No token provided!");
+        }
+
+        if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
+            throw new AccessDeniedException("Invalid token!");
+        }
+
+        String userId = tokenService.extractUserId(token);
+        //User foundUser = userService.findUserById(userId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(commentService.updateComment(id, req));
+    }
+
+    @DeleteMapping("/comment/{id}")
+    public ResponseEntity<?> deleteComment(@PathVariable(name="id") String id, @RequestHeader(name = "auth-token") String token) {
+
+        if(token == null || token.isEmpty()) {
+            throw new AccessDeniedException("No token provided!");
+        }
+
+        if(tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
+            throw new AccessDeniedException("Invalid token!");
+        }
+
+        String userId = tokenService.extractUserId(token);
+        User foundUser = userService.findUserById(userId);
+
+        commentService.deleteComment(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 
 }
