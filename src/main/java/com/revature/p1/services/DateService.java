@@ -4,9 +4,11 @@ import com.revature.p1.dtos.requests.NewDateRequest;
 import com.revature.p1.entities.Date;
 import com.revature.p1.entities.User;
 import com.revature.p1.repositories.DateRepository;
+import com.revature.p1.utils.custom_exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DateService {
@@ -24,5 +26,13 @@ public class DateService {
 
     public List<Date> findByUser(User foundUser) {
         return dateRepo.findByUser(foundUser);
+    }
+
+    public void deleteDateById(String id) {
+        Optional<Date> dateOpt = dateRepo.findById(id);
+        if(dateOpt.isPresent()) {
+            dateRepo.deleteById(id);
+        }
+        throw new ResourceNotFoundException("No date found with id: "  + id + " found.");
     }
 }
