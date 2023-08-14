@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(exposedHeaders = {"auth-token"})
 @RestController
 @RequestMapping("/locations")
 public class LocationController {
@@ -45,7 +45,7 @@ public class LocationController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/read")
+    @GetMapping("/locations")
     public ResponseEntity<List<Location>> getLocation(@RequestHeader(name = "auth-token", required=true) String token) {
 
         if (token == null || token.isEmpty()) {
@@ -59,11 +59,24 @@ public class LocationController {
         String userId = tokenService.extractUserId(token);
         User foundUser = userService.findUserById(userId);
 
-        List<Location> retrievedLocs = locService.findByUser(foundUser);
-        return ResponseEntity.status(HttpStatus.OK).body(retrievedLocs);
+        return ResponseEntity.status(HttpStatus.OK).body(locService.findByUser(foundUser));
     }
 
-    //need to add one for update after auto set home loc
-    //@PathVariable("urlParameter") String urlParameter
+    @PutMapping("/locations/{id}")
+    public ResponseEntity<Location> updateLocation(@PathVariable(name="id") String id, @RequestBody NewLocationRequest req, @RequestHeader(name = "auth-token", required=true) String token) {
+
+        if (token == null || token.isEmpty()) {
+            throw new AccessDeniedException("No token provided!");
+        }
+
+        if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
+            throw new AccessDeniedException("Invalid token!");
+        }
+
+        String userId = tokenService.extractUserId(token);
+        User foundUser = userService.findUserById(userId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(locService.updateLocation(id, req, foundUser));
+    }
 
 }

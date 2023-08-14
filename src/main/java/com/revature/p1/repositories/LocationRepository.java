@@ -10,7 +10,8 @@ import java.util.List;
 @Repository
 public interface LocationRepository extends JpaRepository<Location, String> {
 
-    Location save(Location location);
     List<Location> findByUser(User user);
+
+    Location findByHomeTrue(User user);
 
 }

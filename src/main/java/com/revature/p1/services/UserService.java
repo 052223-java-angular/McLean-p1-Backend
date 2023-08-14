@@ -55,7 +55,7 @@ public class UserService {
         userRepo.save(newUser);
 
         // user is now in the db, so we link the location by user
-        Location newLocation = new Location("home", req.getLongitude(), req.getLatitude(), newUser);
+        Location newLocation = new Location("home", req.getLongitude(), req.getLatitude(), true, newUser);
         locationService.save(newLocation);
 
         return newUser;

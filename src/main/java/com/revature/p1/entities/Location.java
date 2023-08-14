@@ -29,16 +29,20 @@ public class Location {
     @Column(name = "latitude", nullable = false)
     private double latitude;
 
+    @Column(name = "home", nullable = false)
+    private boolean home;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;
 
-    public Location(String name, double longitude, double latitude, User user) {
+    public Location(String name, double longitude, double latitude, boolean home, User user) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.home = home;
         this.user = user;
     }
 
