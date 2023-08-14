@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -32,5 +34,12 @@ public class Comment {
     @JsonBackReference
     private User user;
 
+    public Comment(String comment, long created_at, long edited_at, User user) {
+        this.id = UUID.randomUUID().toString();
+        this.comment = comment;
+        this.created_at = created_at;
+        this.edited_at = edited_at;
+        this.user = user;
+    }
 
 }

@@ -74,6 +74,9 @@ public class DateController {
             throw new AccessDeniedException("Invalid token!");
         }
 
+        String userId = tokenService.extractUserId(token);
+        //User foundUser = userService.findUserById(userId);
+
         dateService.deleteDateById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
