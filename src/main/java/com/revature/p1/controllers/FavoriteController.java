@@ -1,7 +1,6 @@
 package com.revature.p1.controllers;
 
 import com.revature.p1.dtos.requests.NewFavoriteRequest;
-import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.entities.Favorite;
 import com.revature.p1.entities.User;
 import com.revature.p1.services.FavoriteService;

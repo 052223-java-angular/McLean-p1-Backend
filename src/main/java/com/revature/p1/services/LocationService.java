@@ -25,7 +25,6 @@ public class LocationService {
         return locationRepo.save(location);
     }
 
-
     public List<Location> findByUser(User user) {
         return locationRepo.findByUser(user);
     }

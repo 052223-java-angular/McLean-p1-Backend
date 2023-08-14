@@ -22,7 +22,6 @@ public class AuthController {
         this.tokenService = tokenService;
     }
 
-    //there is also @GetMapping("/all"), @PutMapping("/update"), @DeleteMapping("/delete")
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody NewUserRequest req) {
         if(!userService.isValidUsername(req.getUsername())) {

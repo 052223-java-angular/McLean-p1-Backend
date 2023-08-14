@@ -27,14 +27,12 @@ public class LocationController {
         this.userService = userService;
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<?> createLocation(@RequestBody NewLocationRequest req) {
+    @PostMapping("/location")
+    public ResponseEntity<?> createLocation(@RequestBody NewLocationRequest req, @RequestHeader(name = "auth-token", required=true) String token) {
 
-        if (req.getToken() == null || req.getToken().isEmpty()) {
+        if (token == null || token.isEmpty()) {
             throw new AccessDeniedException("No token provided!");
         }
-
-        String token = req.getToken();
 
         if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
             throw new AccessDeniedException("Invalid token!");
@@ -48,13 +46,11 @@ public class LocationController {
     }
 
     @GetMapping("/read")
-    public ResponseEntity<List<Location>> getLocation(@RequestBody NewLocationRequest req) {
+    public ResponseEntity<List<Location>> getLocation(@RequestHeader(name = "auth-token", required=true) String token) {
 
-        if (req.getToken() == null || req.getToken().isEmpty()) {
+        if (token == null || token.isEmpty()) {
             throw new AccessDeniedException("No token provided!");
         }
-
-        String token = req.getToken();
 
         if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
             throw new AccessDeniedException("Invalid token!");
