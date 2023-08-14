@@ -39,7 +39,7 @@ public class LocationService {
         Location locationToUpdate = location.get();
 
         //remove old home location then update new home location
-        Location currentHome = locationRepo.findByHomeTrue(user);
+        Location currentHome = locationRepo.findLocationByHomeTrueAndUser(user);
         currentHome.setHome(false);
         locationRepo.save(currentHome);
 
