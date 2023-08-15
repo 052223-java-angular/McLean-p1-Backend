@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(exposedHeaders = {"auth-token"})
 @RestController
 @RequestMapping("/dates")
 public class DateController {
@@ -28,14 +28,12 @@ public class DateController {
         this.dateService = dateService;
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<?> saveDate(@RequestBody NewDateRequest req) {
+    @PostMapping("/date")
+    public ResponseEntity<?> saveDate(@RequestBody NewDateRequest req, @RequestHeader(name = "auth-token", required=true) String token) {
 
-        if (req.getToken() == null || req.getToken().isEmpty()) {
+        if (token == null || token.isEmpty()) {
             throw new AccessDeniedException("No token provided!");
         }
-
-        String token = req.getToken();
 
         if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
             throw new AccessDeniedException("Invalid token!");
@@ -44,29 +42,43 @@ public class DateController {
         String userId = tokenService.extractUserId(token);
         User foundUser = userService.findUserById(userId);
 
-        //date service -save
         dateService.save(req, foundUser);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/read/{id}")
-    public ResponseEntity<List<Date>> getDates(@RequestBody NewDateRequest req, @PathVariable("id") String id) {
+    @GetMapping("/dates")
+    public ResponseEntity<List<Date>> getDates(@RequestHeader(name = "auth-token", required=true) String token) {
 
-//        if (req.getToken() == null || req.getToken().isEmpty()) {
-//            throw new AccessDeniedException("No token provided!");
-//        }
-//
-//        String token = req.getToken();
-//
-//        if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
-//            throw new AccessDeniedException("Invalid token!");
-//        }
+        if (token == null || token.isEmpty()) {
+            throw new AccessDeniedException("No token provided!");
+        }
 
-        //String userId = tokenService.extractUserId(token);
-        User foundUser = userService.findUserById(id);
+        if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
+            throw new AccessDeniedException("Invalid token!");
+        }
 
-        List<Date> retrievedDates = dateService.findByUser(foundUser);
-        return ResponseEntity.status(HttpStatus.OK).body(retrievedDates);
+        String userId = tokenService.extractUserId(token);
+        User foundUser = userService.findUserById(userId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(dateService.findByUser(foundUser));
+    }
+
+    @DeleteMapping("/date/{id}")
+    public ResponseEntity<?> deleteDate(@PathVariable(name="id") String id, @RequestHeader(name = "auth-token", required=true) String token) {
+
+        if (token == null || token.isEmpty()) {
+            throw new AccessDeniedException("No token provided!");
+        }
+
+        if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
+            throw new AccessDeniedException("Invalid token!");
+        }
+
+        String userId = tokenService.extractUserId(token);
+        //User foundUser = userService.findUserById(userId);
+
+        dateService.deleteDateById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }

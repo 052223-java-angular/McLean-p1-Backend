@@ -16,13 +16,16 @@ public class FavoriteService {
     }
 
     public Favorite save(NewFavoriteRequest req, User user) {
-        Favorite newFav = new Favorite(req.getConstellation(), user);
-        return favoriteRepo.save(newFav);
+        return favoriteRepo.save(new Favorite(req.getConstellation(), user));
     }
 
     public Favorite findByUser(User user) {
         return favoriteRepo.findByUser(user);
     }
 
+    public Favorite update(NewFavoriteRequest req, User user) {
+        favoriteRepo.delete(favoriteRepo.findByUser(user));
+        return favoriteRepo.save(new Favorite(req.getConstellation(), user));
+    }
 
 }

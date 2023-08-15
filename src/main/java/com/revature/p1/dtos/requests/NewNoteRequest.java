@@ -9,13 +9,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class NewLocationRequest {
+public class NewNoteRequest {
 
-    private String name;
-    private double longitude;
-    private double latitude;
-    private boolean home;
+    private String note;
+    private long created_at;
+    private long edited_at;
+    private String date_id;
 
 }
-
-

@@ -21,6 +21,5 @@ public class NewDateRequest {
     private double uranus_phase;
     private double neptune_phase;
     private double pluto_phase;
-    private String token;
 
 }

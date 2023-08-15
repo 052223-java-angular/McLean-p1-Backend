@@ -1,7 +1,6 @@
 package com.revature.p1.controllers;
 
 import com.revature.p1.dtos.requests.NewFavoriteRequest;
-import com.revature.p1.dtos.responses.Principal;
 import com.revature.p1.entities.Favorite;
 import com.revature.p1.entities.User;
 import com.revature.p1.services.FavoriteService;
@@ -12,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
+@CrossOrigin(exposedHeaders = {"auth-token"})
 @RestController
 @RequestMapping("/favorites")
 public class FavoriteController {
@@ -26,14 +25,12 @@ public class FavoriteController {
         this.userService = userService;
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<?> createFavorite(@RequestBody NewFavoriteRequest req) {
+    @PostMapping("/favorite")
+    public ResponseEntity<?> createFavorite(@RequestBody NewFavoriteRequest req, @RequestHeader(name = "auth-token", required=true) String token) {
 
-        if (req.getToken() == null || req.getToken().isEmpty()) {
+        if (token == null || token.isEmpty()) {
             throw new AccessDeniedException("No token provided!");
         }
-
-        String token = req.getToken();
 
         if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
             throw new AccessDeniedException("Invalid token!");
@@ -47,14 +44,12 @@ public class FavoriteController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/read")
-    public ResponseEntity<Favorite> readFavorite(@RequestBody NewFavoriteRequest req) {
+    @GetMapping("/favorite")
+    public ResponseEntity<Favorite> readFavorite(@RequestHeader(name = "auth-token", required=true) String token) {
 
-        if (req.getToken() == null || req.getToken().isEmpty()) {
+        if (token == null || token.isEmpty()) {
             throw new AccessDeniedException("No token provided!");
         }
-
-        String token = req.getToken();
 
         if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
             throw new AccessDeniedException("Invalid token!");
@@ -63,9 +58,24 @@ public class FavoriteController {
         String userId = tokenService.extractUserId(token);
         User foundUser = userService.findUserById(userId);
 
-        Favorite retrievedFav = favoriteService.findByUser(foundUser);
+        return ResponseEntity.status(HttpStatus.OK).body(favoriteService.findByUser(foundUser));
+    }
 
-        return ResponseEntity.status(HttpStatus.OK).body(retrievedFav);
+    @PutMapping("/favorite")
+    public ResponseEntity<Favorite> updateFavorite(@RequestBody NewFavoriteRequest req, @RequestHeader(name = "auth-token", required=true) String token) {
+
+        if (token == null || token.isEmpty()) {
+            throw new AccessDeniedException("No token provided!");
+        }
+
+        if (tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
+            throw new AccessDeniedException("Invalid token!");
+        }
+
+        String userId = tokenService.extractUserId(token);
+        User foundUser = userService.findUserById(userId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(favoriteService.update(req, foundUser));
     }
 
 }
