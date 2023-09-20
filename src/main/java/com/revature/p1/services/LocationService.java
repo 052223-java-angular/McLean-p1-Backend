@@ -47,4 +47,12 @@ public class LocationService {
         return locationRepo.save(locationToUpdate);
     }
 
+    public void deleteLocation(String id) {
+        Optional<Location> locOpt = locationRepo.findById(id);
+        if(locOpt.isEmpty()) {
+            throw new ResourceNotFoundException("No Location with id " + id + " found.");
+        }
+        locationRepo.delete(locOpt.get());
+    }
+
 }
