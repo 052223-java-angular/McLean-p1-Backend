@@ -1,6 +1,7 @@
 package com.revature.p1.controllers;
 
 import com.revature.p1.dtos.requests.NewCommentRequest;
+import com.revature.p1.dtos.responses.CommentResponse;
 import com.revature.p1.entities.Comment;
 import com.revature.p1.entities.User;
 import com.revature.p1.services.CommentService;
@@ -9,6 +10,7 @@ import com.revature.p1.services.UserService;
 import com.revature.p1.utils.custom_exceptions.AccessDeniedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,7 +48,7 @@ public class CommentController {
     }
 
     @GetMapping("/comments")
-    public ResponseEntity<List<Comment>> getComments(@RequestHeader(name = "auth-token") String token) {
+    public ResponseEntity<List<CommentResponse>> getComments(@RequestHeader(name = "auth-token") String token) {
 
         if (token == null || token.isEmpty()) {
             throw new AccessDeniedException("No token provided!");
@@ -94,6 +96,11 @@ public class CommentController {
 
         String userId = tokenService.extractUserId(token);
         User foundUser = userService.findUserById(userId);
+
+        String commentOwnerId = commentService.getCommentOwner(id);
+        if(!commentOwnerId.equals(userId)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authorized to delete this post.");
+        }
 
         commentService.deleteComment(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
