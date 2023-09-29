@@ -31,7 +31,7 @@ public class CommentController {
     }
 
     @PostMapping("/comment")
-    public ResponseEntity<Comment> createComment(@RequestBody NewCommentRequest req, @RequestHeader(name = "auth-token") String token) {
+    public ResponseEntity<CommentResponse> createComment(@RequestBody NewCommentRequest req, @RequestHeader(name = "auth-token") String token) {
 
         if (token == null || token.isEmpty()) {
             throw new AccessDeniedException("No token provided!");
@@ -44,7 +44,9 @@ public class CommentController {
         String userId = tokenService.extractUserId(token);
         User foundUser = userService.findUserById(userId);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(commentService.createComment(req, foundUser));
+        Comment comment = commentService.createComment(req, foundUser);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(new CommentResponse(comment));
     }
 
     @GetMapping("/comments")

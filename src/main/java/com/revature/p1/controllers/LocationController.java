@@ -28,7 +28,7 @@ public class LocationController {
     }
 
     @PostMapping("/location")
-    public ResponseEntity<?> createLocation(@RequestBody NewLocationRequest req, @RequestHeader(name = "auth-token", required=true) String token) {
+    public ResponseEntity<Location> createLocation(@RequestBody NewLocationRequest req, @RequestHeader(name = "auth-token", required=true) String token) {
 
         if (token == null || token.isEmpty()) {
             throw new AccessDeniedException("No token provided!");
@@ -40,9 +40,8 @@ public class LocationController {
 
         String userId = tokenService.extractUserId(token);
         User foundUser = userService.findUserById(userId);
-        locService.save(req, foundUser);
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(locService.save(req, foundUser));
     }
 
     @GetMapping("/locations")
