@@ -16,6 +16,8 @@ public class FavoriteService {
     }
 
     public Favorite save(NewFavoriteRequest req, User user) {
+        //make sure only 1 favorite per account
+        favoriteRepo.delete(findByUser(user));
         return favoriteRepo.save(new Favorite(req.getConstellation(), user));
     }
 

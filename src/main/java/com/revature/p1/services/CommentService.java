@@ -1,12 +1,14 @@
 package com.revature.p1.services;
 
 import com.revature.p1.dtos.requests.NewCommentRequest;
+import com.revature.p1.dtos.responses.CommentResponse;
 import com.revature.p1.entities.Comment;
 import com.revature.p1.entities.User;
 import com.revature.p1.repositories.CommentRepository;
 import com.revature.p1.utils.custom_exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,8 +25,13 @@ public class CommentService {
         return commentRepo.save(new Comment(req.getComment(), req.getCreated_at(), req.getEdited_at(), user));
     }
 
-    public List<Comment> getAllComments() {
-        return commentRepo.findAll();
+    public List<CommentResponse> getAllComments() {
+        List<Comment> comments = commentRepo.findAll();
+        List<CommentResponse> withUserId = new ArrayList<>();
+        for(Comment comment : comments) {
+            withUserId.add(new CommentResponse(comment));
+        }
+        return withUserId;
     }
 
     public Comment updateComment(String id, NewCommentRequest req) {
@@ -44,6 +51,12 @@ public class CommentService {
             throw new ResourceNotFoundException("No comment with id: " + id + " found.");
         }
         commentRepo.delete(commentOpt.get());
+    }
+
+    public String getCommentOwner(String commentId) {
+        Comment comment = commentRepo.findById(commentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Comment with id " + commentId + " was not found."));
+        return comment.getUser().getId();
     }
 
 }

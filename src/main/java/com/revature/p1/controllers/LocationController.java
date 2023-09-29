@@ -28,7 +28,7 @@ public class LocationController {
     }
 
     @PostMapping("/location")
-    public ResponseEntity<?> createLocation(@RequestBody NewLocationRequest req, @RequestHeader(name = "auth-token", required=true) String token) {
+    public ResponseEntity<Location> createLocation(@RequestBody NewLocationRequest req, @RequestHeader(name = "auth-token", required=true) String token) {
 
         if (token == null || token.isEmpty()) {
             throw new AccessDeniedException("No token provided!");
@@ -40,9 +40,8 @@ public class LocationController {
 
         String userId = tokenService.extractUserId(token);
         User foundUser = userService.findUserById(userId);
-        locService.save(req, foundUser);
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(locService.save(req, foundUser));
     }
 
     @GetMapping("/locations")
@@ -77,6 +76,24 @@ public class LocationController {
         User foundUser = userService.findUserById(userId);
 
         return ResponseEntity.status(HttpStatus.OK).body(locService.updateLocation(id, req, foundUser));
+    }
+
+    @DeleteMapping("/locations/{id}")
+    public ResponseEntity<?> deleteLocation(@PathVariable(name="id") String id, @RequestHeader(name = "auth-token", required=true) String token) {
+
+        if(token == null || token.isEmpty()) {
+            throw new AccessDeniedException("No token provided!");
+        }
+
+        if(tokenService.extractUserId(token) == null || tokenService.extractUserId(token).isEmpty()) {
+            throw new AccessDeniedException("Invalid token!");
+        }
+
+        String userId = tokenService.extractUserId(token);
+        User foundUser = userService.findUserById(userId);
+
+        locService.deleteLocation(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }
